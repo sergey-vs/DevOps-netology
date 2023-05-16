@@ -51,7 +51,8 @@ netology@debian:~$ vagrant -v
 Vagrant 2.2.14
 ```
 
-```netology@debian:~$ ansible --version
+```
+netology@debian:~$ ansible --version
 ansible 2.10.8
   config file = None
   configured module search path = ['/home/netology/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
