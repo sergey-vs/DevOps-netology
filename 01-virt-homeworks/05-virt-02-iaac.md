@@ -52,6 +52,12 @@ Vagrant 2.2.14
 ```
 
 ```
+netology@debian:~$ terraform --version
+Terraform v1.4.6
+on linux_amd64
+```
+
+```
 netology@debian:~$ ansible --version
 ansible 2.10.8
   config file = None
