@@ -44,9 +44,21 @@ netology@debian:~$ virtualboxvm -h
 Oracle VM VirtualBox VM Runner v6.1.44
 (C) 2005-2023 Oracle Corporation
 All rights reserved.
-
 ```
 
+```
+netology@debian:~$ vagrant -v
+Vagrant 2.2.14
+```
+
+```netology@debian:~$ ansible --version
+ansible 2.10.8
+  config file = None
+  configured module search path = ['/home/netology/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python3/dist-packages/ansible
+  executable location = /usr/bin/ansible
+  python version = 3.9.2 (default, Feb 28 2021, 17:03:44) [GCC 10.2.1 20210110]
+```
 ***
 
 ## Задание 4
