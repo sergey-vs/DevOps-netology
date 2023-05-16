@@ -1,4 +1,4 @@
-# Домашнее задание к занятию 2. «Применение принципов IaaC в работе с виртуальными машинами»
+# Домашнее задание к занятию 5.2. «Применение принципов IaaC в работе с виртуальными машинами»
 
 ## Задание 1
 > *Опишите основные преимущества применения на практике IaaC-паттернов.*
@@ -71,5 +71,38 @@ ansible 2.10.8
 ## Задание 4
  *Воспроизведите практическую часть лекции самостоятельно.*
  + *Создайте виртуальную машину.*
- + *Зайдите внутрь ВМ, убедитесь, что Docker установлен с помощью команды.*
+ + *Зайдите внутрь ВМ, убедитесь, что Docker установлен с помощью команды. docker ps*
+
+```
+netology@debian:~/vagrant$ vagrant ssh
+Welcome to Ubuntu 20.04.6 LTS (GNU/Linux 5.4.0-144-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue 16 May 2023 02:50:45 PM UTC
+
+  System load:  0.07               Users logged in:          0
+  Usage of /:   13.8% of 30.34GB   IPv4 address for docker0: 172.17.0.1
+  Memory usage: 26%                IPv4 address for eth0:    10.0.2.15
+  Swap usage:   0%                 IPv4 address for eth1:    192.168.56.11
+  Processes:    136
+
+ * Introducing Expanded Security Maintenance for Applications.
+   Receive updates to over 25,000 software packages with your
+   Ubuntu Pro subscription. Free for personal use.
+
+     https://ubuntu.com/pro
+
+
+This system is built by the Bento project by Chef Software
+More information can be found at https://github.com/chef/bento
+Last login: Tue May 16 14:46:13 2023 from 10.0.2.2
+vagrant@server1:~$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+vagrant@server1:~$ docker -v
+Docker version 23.0.6, build ef23cbc
+vagrant@server1:~$ 
+``` 
 
