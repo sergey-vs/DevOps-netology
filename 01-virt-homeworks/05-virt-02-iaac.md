@@ -39,6 +39,14 @@
  +  **Terraform**,
  +  **Ansible**. 
 
+```
+netology@debian:~$ virtualboxvm -h
+Oracle VM VirtualBox VM Runner v6.1.44
+(C) 2005-2023 Oracle Corporation
+All rights reserved.
+
+```
+
 ***
 
 ## Задание 4
