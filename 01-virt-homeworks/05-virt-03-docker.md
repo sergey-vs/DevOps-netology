@@ -20,10 +20,110 @@
 > </body>
 > </html>
 >```
->Опубликуйте созданный fork в своём репозитории и предоставьте ответ в виде ссылки на  
->https://hub.docker.com/username_repo.
 
 </details>
+
+<details><summary><b>Сценарий выполнения задачи:</b></summary>
+
+```SHELL
+netology@deb11-vm1:~/docker$ sudo docker pull nginx:1.24.0-alpine
+1.24.0-alpine: Pulling from library/nginx
+Digest: sha256:b7db705c8986070be8aa99ec0886886ddb3c75b1e46301f54865b16db79e9e52
+Status: Image is up to date for nginx:1.24.0-alpine
+docker.io/library/nginx:1.24.0-alpine
+netology@deb11-vm1:~/docker$ sudo docker images
+REPOSITORY   TAG             IMAGE ID       CREATED       SIZE
+nginx        1.24.0-alpine   1266a3a46e96   5 weeks ago   41.1MB
+netology@deb11-vm1:~/docker$ sudo docker build -t vs813/devops27-nginx:v1 .
+[+] Building 0.2s (7/7) FINISHED                                                                                                                                                                                               
+ => [internal] load build definition from Dockerfile                                                                                                                                                                      0.0s
+ => => transferring dockerfile: 100B                                                                                                                                                                                      0.0s
+ => [internal] load .dockerignore                                                                                                                                                                                         0.0s
+ => => transferring context: 2B                                                                                                                                                                                           0.0s
+ => [internal] load metadata for docker.io/library/nginx:1.24.0-alpine                                                                                                                                                    0.0s
+ => [internal] load build context                                                                                                                                                                                         0.0s
+ => => transferring context: 128B                                                                                                                                                                                         0.0s
+ => [1/2] FROM docker.io/library/nginx:1.24.0-alpine                                                                                                                                                                      0.1s
+ => [2/2] COPY index.html /usr/share/nginx/html                                                                                                                                                                           0.0s
+ => exporting to image                                                                                                                                                                                                    0.0s
+ => => exporting layers                                                                                                                                                                                                   0.0s
+ => => writing image sha256:d70aa10cbf02ffdf951cbc143cf82c7072d1ef7c5bc4ced8b05bcce803f1e822                                                                                                                              0.0s
+ => => naming to docker.io/vs813/devops27-nginx:v1                                                                                                                                                                        0.0s
+netology@deb11-vm1:~/docker$ sudo docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+netology@deb11-vm1:~/docker$ sudo docker run --name test-nginx -p 80:80 -d vs813/devops27-nginx:v1
+6644f9415342d9584ef773bfed3a471a9488eb5fdffcb9b33ed44fb8208a0c7c
+netology@deb11-vm1:~/docker$ curl localhost
+<html>
+<head>
+Hey, Netology
+</head>
+<body>
+<h1>I’m DevOps Engineer!</h1>
+</body>
+</html>
+
+netology@deb11-vm1:~/docker$ sudo docker push vs813/devops27-nginx:v1
+The push refers to repository [docker.io/vs813/devops27-nginx]
+fe85fd490026: Pushed 
+24e414d9930b: Mounted from library/nginx 
+e43c8ee2056a: Mounted from library/nginx 
+effffea84b55: Mounted from library/nginx 
+b42e5b255ff1: Mounted from library/nginx 
+d9c63c119ee8: Mounted from library/nginx 
+f33d2eed4384: Mounted from library/nginx 
+f1417ff83b31: Mounted from library/nginx 
+v1: digest: sha256:0b5effaf72d3487fab5fd31db309a12fafc521f237353c99cfb1c5bec00b91ad size: 1988
+
+netology@deb11-vm1:~/docker$ sudo docker ps
+CONTAINER ID   IMAGE                     COMMAND                  CREATED          STATUS          PORTS                               NAMES
+6644f9415342   vs813/devops27-nginx:v1   "/docker-entrypoint.…"   14 minutes ago   Up 14 minutes   0.0.0.0:80->80/tcp, :::80->80/tcp   test-nginx
+netology@deb11-vm1:~/docker$ sudo docker stop test-nginx
+test-nginx
+netology@deb11-vm1:~/docker$ sudo docker rm test-nginx
+test-nginx
+netology@deb11-vm1:~/docker$ sudo docker system prune -a -f
+Deleted Images:
+untagged: vs813/devops27-nginx:v1
+untagged: vs813/devops27-nginx@sha256:0b5effaf72d3487fab5fd31db309a12fafc521f237353c99cfb1c5bec00b91ad
+deleted: sha256:d70aa10cbf02ffdf951cbc143cf82c7072d1ef7c5bc4ced8b05bcce803f1e822
+deleted: sha256:bc41aae6b3bb5d1b46e55f578b29321e764991c1b9baae4a4ead6fd09c7b7731
+deleted: sha256:96275441808f3158c334ea893e187a2b44c8b399be46379f56e72821c9cf4237
+deleted: sha256:e6882e669fdea1d171566bf051ea65f83761e0b82729896ecb4c88807d0b1297
+deleted: sha256:cea6277e7b8ab26d2488ecb2a94977fff005300c48fd4796247c16d621ea88da
+deleted: sha256:87e887e054f5e3716dbc4e2e8fd84a9a1c7b1b980f7a64e07ae01eb7c638ebd5
+deleted: sha256:e1ec1364fa848f4f4420f77c68e689f657841ec8cd38de2c596ea938aa227fb9
+deleted: sha256:511b6b9b5ab8dba49d5baaebec34a86366612e579685e71f2b6e9f9adcc5160c
+deleted: sha256:f1417ff83b319fbdae6dd9cd6d8c9c88002dcd75ecf6ec201c8c6894681cf2b5
+
+Total reclaimed space: 41.07MB
+netology@deb11-vm1:~/docker$ sudo docker images
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+
+netology@deb11-vm1:~/docker$ sudo docker pull vs813/devops27-nginx:v1
+v1: Pulling from vs813/devops27-nginx
+f56be85fc22e: Pull complete 
+81234aecc257: Pull complete 
+bb5936af66b7: Pull complete 
+f7c8639dc75e: Pull complete 
+d0071b96733a: Pull complete 
+b6b60f9051a8: Pull complete 
+44286d6df869: Pull complete 
+ea930c81c494: Pull complete 
+Digest: sha256:0b5effaf72d3487fab5fd31db309a12fafc521f237353c99cfb1c5bec00b91ad
+Status: Downloaded newer image for vs813/devops27-nginx:v1
+docker.io/vs813/devops27-nginx:v1
+netology@deb11-vm1:~/docker$ sudo docker images
+REPOSITORY             TAG       IMAGE ID       CREATED          SIZE
+vs813/devops27-nginx   v1        d70aa10cbf02   23 minutes ago   41.1MB
+
+```
+
+</details>
+
+Опубликуйте созданный fork в своём репозитории и предоставьте ответ в виде ссылки на  
+https://hub.docker.com/username_repo.
+
 
 ***
 
