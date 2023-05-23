@@ -78,6 +78,48 @@ Docker не подходит в данном случае, т.к. при пот�
  + *Добавьте ещё один файл в папку `/data` на хостовой машине*.
  + *Подключитесь во второй контейнер и отобразите листинг и содержание файлов в `/data` контейнера*.
 
+```shell
+vagrant@server1:~$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+vagrant@server1:~$ docker run -v /data:/data -dt --name centos centos
+Unable to find image 'centos:latest' locally
+latest: Pulling from library/centos
+a1d0c7532777: Pull complete 
+Digest: sha256:a27fd8080b517143cbbbab9dfb7c8571c40d67d534bbdee55bd6c473f432b177
+Status: Downloaded newer image for centos:latest
+58793b2710d7ec02de98828f21ca0cade9b361f7fb0dedc837e07b3e1c83f3be
+vagrant@server1:~$ docker run -v /data:/data -dt --name debian debian
+Unable to find image 'debian:latest' locally
+latest: Pulling from library/debian
+bd73737482dd: Pull complete 
+Digest: sha256:432f545c6ba13b79e2681f4cc4858788b0ab099fc1cca799cc0fae4687c69070
+Status: Downloaded newer image for debian:latest
+fc621565d45259471f673d437b879faae83f30be4c87552c960fa48c4523e7aa
+vagrant@server1:~$ docker exec -it centos /bin/sh
+sh-4.4# echo 'it from centos'>/data/from-centos
+sh-4.4# exit
+exit
+vagrant@server1:~$ su
+Password: 
+root@server1:/home/vagrant# cd
+root@server1:~# echo 'from localhost'>/data/localhost
+root@server1:~# exit
+exit
+vagrant@server1:~$ docker exec -it debian /bin/sh
+# cat /data/from-centos
+it from centos
+# ls -la /data
+total 16
+drwxr-xr-x 2 root root 4096 May 23 14:20 .
+drwxr-xr-x 1 root root 4096 May 23 14:16 ..
+-rw-r--r-- 1 root root   15 May 23 14:19 from-centos
+-rw-r--r-- 1 root root   15 May 23 14:20 localhost
+# exit
+vagrant@server1:~$ docker ps
+CONTAINER ID   IMAGE     COMMAND       CREATED         STATUS         PORTS     NAMES
+fc621565d452   debian    "bash"        7 minutes ago   Up 7 minutes             debian
+58793b2710d7   centos    "/bin/bash"   7 minutes ago   Up 7 minutes             centos
+```
 ***
 
 ## Задание 4(*)
