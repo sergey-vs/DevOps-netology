@@ -4,7 +4,7 @@
 
 ## Задание 1
 
-<details><summary><b>Сценарий выполнения задачи:</b></summary>
+<details><summary><b>Сценарий выполнения задания:</b></summary>
 
 > + создайте свой репозиторий на https://hub.docker.com;
 > + выберите любой образ, который содержит веб-сервер Nginx;
@@ -23,7 +23,7 @@
 
 </details>
 
-<details><summary><b>Выполнение задачи:</b></summary>
+<details><summary><b>Выполнение задания:</b></summary>
 
 ```SHELL
 netology@deb11-vm1:~/docker$ sudo docker pull nginx:1.24.0-alpine
@@ -238,7 +238,7 @@ fc621565d452   debian    "bash"        7 minutes ago   Up 7 minutes             
 
 *Воспроизведите практическую часть лекции самостоятельно*.
 
-<details><summary><b>Выполнение задачи:</b></summary>
+<details><summary><b>Выполнение задания:</b></summary>
 
 ```SHELL
 netology@deb11-vm1:~/docker/ansible$ sudo docker build -t vs813/devops27-ansible:2.9.24 .
@@ -278,3 +278,6 @@ netology@deb11-vm1:~/docker/ansible$
 <details>
 
 *Соберите Docker-образ с Ansible, загрузите на Docker Hub и пришлите ссылку вместе с остальными ответами к задачам*.
+
+
+docker pull vs813/devops27-ansible:2.9.24
