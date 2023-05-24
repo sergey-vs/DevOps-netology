@@ -129,6 +129,8 @@ vs813/devops27-nginx   v1        d70aa10cbf02   23 minutes ago   41.1MB
 
 </details>
 
+[Dockerfile](./src/503)
+
 Опубликуйте созданный fork в своём репозитории и предоставьте ответ в виде ссылки на  
 https://hub.docker.com/username_repo.
 
