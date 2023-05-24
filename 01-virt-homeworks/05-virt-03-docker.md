@@ -238,4 +238,43 @@ fc621565d452   debian    "bash"        7 minutes ago   Up 7 minutes             
 
 *Воспроизведите практическую часть лекции самостоятельно*.
 
+<details><summary><b>Выполнение задачи:</b></summary>
+
+```SHELL
+netology@deb11-vm1:~/docker/ansible$ sudo docker build -t vs813/devops27-ansible:2.9.24 .
+[+] Building 25.1s (5/8)                                                                                                                                                                                                   [+] Building 25.2s (5/8)                                                                                                                                                                                                   
+ => [internal] load build definition from Dockerfile                                                                                                                                                                  0.0ss
+ => => transferring dockerfile: 1.10kB                                                                                                                                                                                0.0ss
+ => [internal] load .dockerignore                                                                                                                                                                                     0.0ss
+ => => transferring context: 2B                                                                                                                                                                                       0.0ss
+ => [internal] load metadata for docker.io/library/alpine:3.14                                                                                                                                                        2.6ss
+ => [auth] library/alpine:pull token for registry-1.docker.io                                                                                                                                                         0.0ss
+ => [1/4] FROM docker.io/library/alpine:3.14@sha256:0f2d5c38dd7a4f4f733e688e3a6733cb5ab1ac6e3cb4603a5dd564e5bfb80eed                                                                                                  1.2ss
+ => => resolve docker.io/library/alpine:3.14@sha256:0f2d5c38dd7a4f4f733e688e3a6733cb5ab1ac6e3cb4603a5dd564e5bfb80eed                                                                                                  0.0ss
+ => => sha256:9e179bacf43c4d3428d57cf459799ba0285b901945f9eccb17b6da056d3532c7 1.47kB / 1.47kB                                                                                                                        0.0ss
+ => => sha256:f7dab3ab2d6ec29aa28769bec35331fb485b5837501b1e8556413d8b5a79c9c8 2.83MB / 2.83MB                                                                                                                        1.0s[[+] Building 195.0s (9/9) FINISHED                                                                                                                                                                                         
+ => [internal] load build definition from Dockerfile                                                                                                                                                                  0.0s  => => transferring dockerfile: 1.10kB                                                                                                                                                                                0.0s
+ => [internal] load .dockerignore                                                                                                                                                                                     0.0s  => => transferring context: 2B                                                                                                                                                                                       0.0s
+ => [internal] load metadata for docker.io/library/alpine:3.14                                                                                                                                                        2.6s  => [auth] library/alpine:pull token for registry-1.docker.io                                                                                                                                                         0.0s
+ => [1/4] FROM docker.io/library/alpine:3.14@sha256:0f2d5c38dd7a4f4f733e688e3a6733cb5ab1ac6e3cb4603a5dd564e5bfb80eed                                                                                                  1.2s  => => resolve docker.io/library/alpine:3.14@sha256:0f2d5c38dd7a4f4f733e688e3a6733cb5ab1ac6e3cb4603a5dd564e5bfb80eed                                                                                                  0.0s
+ => => sha256:9e179bacf43c4d3428d57cf459799ba0285b901945f9eccb17b6da056d3532c7 1.47kB / 1.47kB                                                                                                                        0.0s  => => sha256:f7dab3ab2d6ec29aa28769bec35331fb485b5837501b1e8556413d8b5a79c9c8 2.83MB / 2.83MB                                                                                                                        1.0s
+ => => sha256:0f2d5c38dd7a4f4f733e688e3a6733cb5ab1ac6e3cb4603a5dd564e5bfb80eed 1.64kB / 1.64kB                                                                                                                        0.0s  => => sha256:71859b0c62df47efaeae4f93698b56a8dddafbf041778fd668bbd1ab45a864f8 528B / 528B                                                                                                                            0.0s
+ => => extracting sha256:f7dab3ab2d6ec29aa28769bec35331fb485b5837501b1e8556413d8b5a79c9c8                                                                                                                             0.0s  => [2/4] RUN CARGO_NET_GIT_FETCH_WITH_CLI=1 &&     apk --no-cache add         sudo         python3        py3-pip         openssl         ca-certificates         sshpass         openssh-client         rsync     187.6s
+ => [3/4] RUN mkdir /ansible &&     mkdir -p /etc/ansible &&     echo 'localhost' > /etc/ansible/hosts                                                                                                                0.3s  => [4/4] WORKDIR /ansible                                                                                                                                                                                            0.0s 
+ => exporting to image                                                                                                                                                                                                3.2s  => => exporting layers                                                                                                                                                                                               3.2s 
+ => => writing image sha256:6485d624f94eb472fcd5200944c38c16210b2eaf5928ac62a55d5b3d1169f4b2                                                                                                                          0.0s  => => naming to docker.io/vs813/devops27-ansible:2.9.24                                                                                                                                                              0.0s
+
+netology@deb11-vm1:~/docker/ansible$ sudo docker push vs813/devops27-ansible:2.9.24
+The push refers to repository [docker.io/vs813/devops27-ansible]
+5f70bf18a086: Pushed 
+5b4d122a652c: Pushed 
+6256e2f25346: Pushed 
+9733ccc39513: Mounted from library/alpine 
+2.9.24: digest: sha256:f50a8e73c944ae75e1f1da3ac8fd6493805385a2fbacad045fc138504a140fdc size: 1153
+netology@deb11-vm1:~/docker/ansible$ 
+
+```
+
+<details>
+
 *Соберите Docker-образ с Ansible, загрузите на Docker Hub и пришлите ссылку вместе с остальными ответами к задачам*.
