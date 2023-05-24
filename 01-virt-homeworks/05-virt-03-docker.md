@@ -190,6 +190,8 @@ Docker не подходит в данном случае, т.к. при пот�
  + *Добавьте ещё один файл в папку `/data` на хостовой машине*.
  + *Подключитесь во второй контейнер и отобразите листинг и содержание файлов в `/data` контейнера*.
 
+<details><summary><b>Выполнение задания:</b></summary>
+
 ```shell
 vagrant@server1:~$ docker ps
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
@@ -232,6 +234,9 @@ CONTAINER ID   IMAGE     COMMAND       CREATED         STATUS         PORTS     
 fc621565d452   debian    "bash"        7 minutes ago   Up 7 minutes             debian
 58793b2710d7   centos    "/bin/bash"   7 minutes ago   Up 7 minutes             centos
 ```
+
+</details>
+
 ***
 
 ## Задание 4(*)
@@ -275,9 +280,8 @@ netology@deb11-vm1:~/docker/ansible$
 
 ```
 
-<details>
+</details>
 
 *Соберите Docker-образ с Ansible, загрузите на Docker Hub и пришлите ссылку вместе с остальными ответами к задачам*.
 
-
-docker pull vs813/devops27-ansible:2.9.24
+https://hub.docker.com/r/vs813/devops27-ansible
