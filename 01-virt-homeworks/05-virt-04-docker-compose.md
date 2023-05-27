@@ -78,7 +78,7 @@ netology@deb11-vm1:~/yandex-cloud$ yc compute image list
 
 *Чтобы получить зачёт, вам нужно предоставить скриншот страницы с созданным образом из личного кабинета YandexCloud*.
 
-![Screenshot](./screenshot/yc_50401.png)
+![Screenshot](./screenshots/yc_50401.png)
 
 ***
 
