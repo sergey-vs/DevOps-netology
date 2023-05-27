@@ -77,7 +77,7 @@ netology@deb11-vm1:~/yandex-cloud$ yc compute image list
 [debian11.json](./src/504/packer)
 
 *Чтобы получить зачёт, вам нужно предоставить скриншот страницы с созданным образом из личного кабинета YandexCloud*.
-<div style=widht:auto ; height:250px>
+<div style="width:auto ; height:250px">
 
 ![Screenshot](./screenshots/yc_50401.png)
 
