@@ -8,7 +8,6 @@
 
 <details><summary><b>Сценарий выполнения задания 1 :</b></summary>
 
-
 ```shell
 netology@deb11-vm1:~$ yc vpc network create --name network-vpc --labels my-label=netology --description "My network"
 id: enpmmf5psu3cpo130b6m
@@ -82,6 +81,7 @@ netology@deb11-vm1:~/yandex-cloud$ yc compute image list
 ![Screenshot](./screenshots/yc_50401.png)
 
 </div>
+
 ***
 
 ## Задание 2
