@@ -88,6 +88,12 @@ netology@deb11-vm1:~/yandex-cloud$ yc compute image list
 
 2.1. *Создайте вашу первую виртуальную машину в YandexCloud с помощью web-интерфейса YandexCloud*.
 
+<div style="width:auto ; height:250px">
+
+![Screenshot](./screenshots/yc_50402.png)
+
+</div>
+
 2.2.* (**Необязательное задание**)
 
 *Создайте вашу первую виртуальную машину в YandexCloud с помощью Terraform* (*вместо использования веб-интерфейса* YandexCloud).   
