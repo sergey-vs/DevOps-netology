@@ -103,7 +103,7 @@ netology@deb11-vm1:~/yandex-cloud$ yc compute image list
 
 <div style="width:auto ; height:250px">
 
-![Screenshot](./screenshots/yc_50402.png)
+![Screenshot](./screenshots/yc_504022.png)
 
 </div>
 
@@ -232,6 +232,7 @@ Outputs:
 
 external_ip_address_node01_yandex_cloud = "158.160.60.133"
 internal_ip_address_node01_yandex_cloud = "10.1.2.19"
+
 netology@deb11-vm1:~/terraform$ ssh debian@158.160.60.133
 The authenticity of host '158.160.60.133 (158.160.60.133)' can't be established.
 ECDSA key fingerprint is SHA256:Xw5QIeyBdkkgmdehNh6jtjabHjYmlX9GES8Bk4O53Go.
