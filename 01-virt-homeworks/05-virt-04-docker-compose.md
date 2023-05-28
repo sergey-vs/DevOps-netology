@@ -258,9 +258,10 @@ debian@node01:~$ hostnamectl
       Architecture: x86-64
 
 debian@node01:~$ 
+
 ```
 
-</detalis>
+</details>
 
 ***
 
