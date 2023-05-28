@@ -97,7 +97,7 @@ netology@deb11-vm1:~/yandex-cloud$ yc compute image list
 2.2.* (**Необязательное задание**)
 
 *Создайте вашу первую виртуальную машину в YandexCloud с помощью Terraform* (*вместо использования веб-интерфейса* YandexCloud).   
-*Используйте Terraform-код в директории* [src/terraform](./src/504/terraform).
+*Используйте Terraform-код в директории* ([src/terraform](./src/504/terraform)).
 
 *Чтобы получить зачёт, вам нужно предоставить вывод команды terraform apply и страницы свойств, созданной ВМ из личного кабинета YandexCloud*
 
