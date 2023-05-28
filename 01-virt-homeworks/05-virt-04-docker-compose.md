@@ -107,7 +107,7 @@ netology@deb11-vm1:~/yandex-cloud$ yc compute image list
 
 </div>
 
-<details><summary><b>Сценарий выполнения задания 2 :</b></summary>
+<details><summary><b>Сценарий выполнения задания 2.2 :</b></summary>
 
 ```shell
 netology@deb11-vm1:~/terraform$ terraform apply
@@ -268,7 +268,7 @@ debian@node01:~$
 
 ## Задание 3
 
-*С помощью Ansible и Docker Compose разверните на виртуальной машине из предыдущего задания систему мониторинга на основе Prometheus/Grafana. Используйте Ansible-код в директории (src/ansible)*.
+*С помощью Ansible и Docker Compose разверните на виртуальной машине из предыдущего задания систему мониторинга на основе Prometheus/Grafana. Используйте Ansible-код в директории ([src/ansible](./src/504/ansible))*.
 
 *Чтобы получить зачёт, вам нужно предоставить вывод команды* `docker ps` , *все контейнеры, описанные в docker-compose, должны быть в статусе* `Up`.
 
