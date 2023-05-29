@@ -8,67 +8,65 @@
 
 <details><summary><b>Сценарий выполнения задания 1 :</b></summary>
 
-```shell
+````SHELL
 netology@deb11-vm1:~$ yc vpc network create --name network-vpc --labels my-label=netology --description "My network"
-id: enpmmf5psu3cpo130b6m
+id: enpjkrklethegvnpi1v4
 folder_id: b1gpok0ichaplcklr1ve
-created_at: "2023-05-25T15:51:22Z"
+created_at: "2023-05-29T11:43:07Z"
 name: network-vpc
 description: My network
 labels:
   my-label: netology
 
-netology@deb11-vm1:~$ yc vpc subnet create --name my-subnet-a --zone ru-central1-a --range 10.1.2.0/24 --network-net network-vpc --description "My-subnet"
-ERROR: unknown flag: --network-net
 netology@deb11-vm1:~$ yc vpc subnet create --name my-subnet-a --zone ru-central1-a --range 10.1.2.0/24 --network-name network-vpc --description "My-subnet"
-id: e9b40kdedhfbrfndr94e
+id: e9bro71h3nj18vnd2m7f
 folder_id: b1gpok0ichaplcklr1ve
-created_at: "2023-05-25T15:56:48Z"
+created_at: "2023-05-29T11:43:57Z"
 name: my-subnet-a
 description: My-subnet
-network_id: enpmmf5psu3cpo130b6m
+network_id: enpjkrklethegvnpi1v4
 zone_id: ru-central1-a
 v4_cidr_blocks:
   - 10.1.2.0/24
 
-netology@deb11-vm1:~/yandex-cloud$ packer validate debian11.json
-The configuration is valid.
-netology@deb11-vm1:~/yandex-cloud$ sudo packer build debian11.json
+netology@deb11-vm1:~$ cd yandex-cloud/
+
+netology@deb11-vm1:~/yandex-cloud$ packer build centos-7-base.json 
 yandex: output will be in this color.
 
 ==> yandex: Creating temporary RSA SSH key for instance...
-==> yandex: Using as source image: fd89dg1rq7uqslc6eigm (name: "debian-11-v20230522", family: "debian-11")
-==> yandex: Use provided subnet id e9b40kdedhfbrfndr94e
+==> yandex: Using as source image: fd8atq0nftbsilars2sa (name: "centos-7-v20230529", family: "centos-7")
+==> yandex: Use provided subnet id e9bro71h3nj18vnd2m7f
 ==> yandex: Creating disk...
 ==> yandex: Creating instance...
-==> yandex: Waiting for instance with id fhmrntddebdhpsjqaeqe to become active...
-    yandex: Detected instance IP: 158.160.102.137
-==> yandex: Using SSH communicator to connect: 158.160.102.137
+==> yandex: Waiting for instance with id fhm54a90ornkh77lrvk2 to become active...
+    yandex: Detected instance IP: 84.201.158.115
+==> yandex: Using SSH communicator to connect: 84.201.158.115
 ==> yandex: Waiting for SSH to become available...
 ==> yandex: Connected to SSH!
-==> yandex: Provisioning with shell script: /tmp/packer-shell2379814482
-
+==> yandex: Provisioning with shell script: /tmp/packer-shell2233913931
 ...
 ==> yandex: Stopping instance...
 ==> yandex: Deleting instance...
     yandex: Instance has been deleted!
-==> yandex: Creating image: debian-11-nginx-2023-05-27t10-29-37z
+==> yandex: Creating image: centos-7-base
 ==> yandex: Waiting for image to complete...
 ==> yandex: Success image create...
 ==> yandex: Destroying boot disk...
     yandex: Disk has been deleted!
-Build 'yandex' finished after 3 minutes 31 seconds.
+Build 'yandex' finished after 2 minutes 10 seconds.
 
-==> Wait completed after 3 minutes 31 seconds
+==> Wait completed after 2 minutes 10 seconds
 
 ==> Builds finished. The artifacts of successful builds are:
---> yandex: A disk image was created: debian-11-nginx-2023-05-27t10-29-37z (id: fd8ies1oodo9sue03vih) with family name debian-web-server
+--> yandex: A disk image was created: centos-7-base (id: fd86t16m53btkbqndeb2) with family name centos
+
 netology@deb11-vm1:~/yandex-cloud$ yc compute image list
-+----------------------+--------------------------------------+-------------------+----------------------+--------+
-|          ID          |                 NAME                 |      FAMILY       |     PRODUCT IDS      | STATUS |
-+----------------------+--------------------------------------+-------------------+----------------------+--------+
-| fd8ies1oodo9sue03vih | debian-11-nginx-2023-05-27t10-29-37z | debian-web-server | f2eu5sakphet32oa2ss7 | READY  |
-+----------------------+--------------------------------------+-------------------+----------------------+--------+
++----------------------+---------------+--------+----------------------+--------+
+|          ID          |     NAME      | FAMILY |     PRODUCT IDS      | STATUS |
++----------------------+---------------+--------+----------------------+--------+
+| fd86t16m53btkbqndeb2 | centos-7-base | centos | f2eu9vp2082smvi43slh | READY  |
++----------------------+---------------+--------+----------------------+--------+
 
 ```
 </details>
