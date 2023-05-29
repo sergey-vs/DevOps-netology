@@ -69,6 +69,7 @@ netology@deb11-vm1:~/yandex-cloud$ yc compute image list
 +----------------------+---------------+--------+----------------------+--------+
 
 ```
+
 </details>
 
 [debian11.json](./src/504/packer)
