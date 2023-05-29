@@ -109,7 +109,7 @@ netology@deb11-vm1:~/yandex-cloud$ yc compute image list
 
 <details><summary><b>Сценарий выполнения задания 2.2 :</b></summary>
 
-```shell
+```SHELL
 netology@deb11-vm1:~/terraform/virt_centos7$ terraform apply
 
 Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
