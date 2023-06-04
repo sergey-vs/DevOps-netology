@@ -250,6 +250,19 @@ centos-release-7-9.2009.1.el7.centos.x86_64
 
 *Чтобы получить зачёт, вам нужно предоставить вывод команды* `docker ps` , *все контейнеры, описанные в [docker-compose](./src/504/ansible/stack), должны быть в статусе* `Up`.
 
+```bash
+[centos@node01 ~]$ sudo docker ps
+CONTAINER ID   IMAGE                              COMMAND                  CREATED             STATUS                       PORTS                                                                              NAMES
+f5ab2170a840   prom/prometheus:v2.17.1            "/bin/prometheus --c…"   About an hour ago   Up About an hour             9090/tcp                                                                           prometheus
+51f8549585f3   stefanprodan/caddy                 "/sbin/tini -- caddy…"   About an hour ago   Up About an hour             0.0.0.0:3000->3000/tcp, 0.0.0.0:9090-9091->9090-9091/tcp, 0.0.0.0:9093->9093/tcp   caddy
+4348563defe0   prom/alertmanager:v0.20.0          "/bin/alertmanager -…"   About an hour ago   Up About an hour             9093/tcp                                                                           alertmanager
+0b8f2bc3ed0f   prom/pushgateway:v1.2.0            "/bin/pushgateway"       About an hour ago   Up About an hour             9091/tcp                                                                           pushgateway
+7cffb1c3ee2b   grafana/grafana:7.4.2              "/run.sh"                About an hour ago   Up About an hour             3000/tcp                                                                           grafana
+86d1bcacaf6b   prom/node-exporter:v0.18.1         "/bin/node_exporter …"   About an hour ago   Up About an hour             9100/tcp                                                                           nodeexporter
+d294a0bbda40   gcr.io/cadvisor/cadvisor:v0.47.0   "/usr/bin/cadvisor -…"   About an hour ago   Up About an hour (healthy)   8080/tcp                                                                           cadvisor
+[centos@node01 ~]$ 
+
+```
 ***
 
 ## Задание 4
