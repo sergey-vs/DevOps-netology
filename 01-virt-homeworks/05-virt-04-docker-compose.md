@@ -276,6 +276,13 @@ d294a0bbda40   gcr.io/cadvisor/cadvisor:v0.47.0   "/usr/bin/cadvisor -…"   Abo
 
 + *скриншот работающего веб-интерфейса* **Grafana** *с текущими метриками*
 
+<div style="width:auto ; height:250px">
+
+![Screenshot](./screenshots/yc_50404.png)
+
+</div>
+
+
 ***
 
 ## Задание 5(*)
