@@ -1,3 +1,4 @@
-# DevOps-netology
+ DevOps-netology
+================
 
-[Виртуализация и контейнеризация](./01-virt-homeworks/README.md)
+## [Виртуализация и контейнеризация](./01-virt-homeworks/README.md)
