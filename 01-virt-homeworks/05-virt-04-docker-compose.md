@@ -1,3 +1,4 @@
+
 # Домашнее задание к занятию 5.4. "Оркестрация группой Docker-контейнеров на примере Docker Compose"
 
 ***
@@ -8,7 +9,7 @@
 
 <details><summary><b>Сценарий выполнения задания 1 :</b></summary>
 
-```SHELL
+```bash
 netology@deb11-vm1:~$ yc vpc network create --name network-vpc --labels my-label=netology --description "My network"
 id: enpjkrklethegvnpi1v4
 folder_id: b1gpok0ichaplcklr1ve
@@ -109,7 +110,7 @@ netology@deb11-vm1:~/yandex-cloud$ yc compute image list
 
 <details><summary><b>Сценарий выполнения задания 2.2 :</b></summary>
 
-```SHELL
+```bash
 netology@deb11-vm1:~/terraform/virt_centos7$ terraform apply
 
 Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
