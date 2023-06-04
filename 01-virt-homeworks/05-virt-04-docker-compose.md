@@ -111,6 +111,7 @@ netology@deb11-vm1:~/yandex-cloud$ yc compute image list
 <details><summary><b>Сценарий выполнения задания 2.2 :</b></summary>
 
 ```bash
+
 netology@deb11-vm1:~/terraform/virt_centos7$ terraform apply
 
 Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
@@ -216,32 +217,26 @@ Do you want to perform these actions?
   Enter a value: yes
 
 yandex_vpc_network.network-vpc: Creating...
-yandex_vpc_network.network-vpc: Creation complete after 2s [id=enp1pulqoreeg6hf19q5]
+yandex_vpc_network.network-vpc: Creation complete after 2s [id=enpn3phsn189os2knl0k]
 yandex_vpc_subnet.subnet-vpc: Creating...
-yandex_vpc_subnet.subnet-vpc: Creation complete after 0s [id=e9bq2qbmg03m1svdtcot]
+yandex_vpc_subnet.subnet-vpc: Creation complete after 1s [id=e9b2u61k1ksocqp3ae5k]
 yandex_compute_instance.node01: Creating...
 yandex_compute_instance.node01: Still creating... [10s elapsed]
 yandex_compute_instance.node01: Still creating... [20s elapsed]
 yandex_compute_instance.node01: Still creating... [30s elapsed]
-yandex_compute_instance.node01: Still creating... [41s elapsed]
-yandex_compute_instance.node01: Creation complete after 43s [id=fhm6rvopevpq9rgb6qid]
+yandex_compute_instance.node01: Creation complete after 33s [id=fhmmu6pbtos5jctia5l3]
 
 Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
 
 Outputs:
 
-external_ip_address_node01_yandex_cloud = "62.84.124.44"
-internal_ip_address_node01_yandex_cloud = "10.1.2.26"
+external_ip_address_node01_yandex_cloud = "84.201.157.187"
+internal_ip_address_node01_yandex_cloud = "10.1.2.22"
 
-netology@deb11-vm1:~/terraform/virt_centos7$ ssh centos@62.84.124.44
-The authenticity of host '62.84.124.44 (62.84.124.44)' can't be established.
-ECDSA key fingerprint is SHA256:NRC35CYgsGDl2cQHuAVymqmZTilRExL1tAwnnKNhIFY.
-Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-Warning: Permanently added '62.84.124.44' (ECDSA) to the list of known hosts.
+netology@deb11-vm1:~/terraform/virt_centos7$ ssh centos@84.201.157.187
 
 [centos@node01 ~]$ rpm -q centos-release
 centos-release-7-9.2009.1.el7.centos.x86_64
-[centos@node01 ~]$ 
 
 ```
 
