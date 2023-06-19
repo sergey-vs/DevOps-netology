@@ -14,7 +14,7 @@
 
 ## Задание 2
 
-<details><summary><b>В БД из задачи 1:</b></summary>
+<details><summary><em>В БД из задачи 1:</em></summary>
 
  + создайте пользователя test-admin-user и БД test_db;
  + в БД test_db создайте таблицу orders и clients (спeцификация таблиц ниже);
@@ -24,7 +24,7 @@
 
 </details>
 
-<details><summary><b>Таблица orders:</b></summary>
+<details><summary><em>Таблица orders:</em></summary>
 
  + id (serial primary key);
  + наименование (string);
@@ -32,7 +32,7 @@
 
 </details>
 
-<details><summary><b>Таблица clients:</b></summary>
+<details><summary><em>Таблица clients:</em></summary>
 
  + id (serial primary key);
  + фамилия (string);
@@ -41,7 +41,7 @@
 
 </details>
 
-<details><summary><b>Приведите:</b></summary>
+<details><summary><em>Приведите:</em></summary>
 
  + итоговый список БД после выполнения пунктов выше;
  + описание таблиц (describe);
@@ -56,7 +56,7 @@
 
 *Используя SQL-синтаксис, наполните таблицы следующими тестовыми данными*:
 
-<details><summary><b>Таблица orders</b></summary>
+<details><summary><em>Таблица orders</em></summary>
 
  |Наименование|цена|
  |------------|----|
@@ -68,7 +68,7 @@
 
 </details>
  
-<details><summary><b>Таблица clients</b></summary>
+<details><summary><em>Таблица clients</em></summary>
 
  |ФИО|Страна проживания|
  |------------|----|
