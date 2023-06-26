@@ -10,6 +10,32 @@
 
 *Приведите получившуюся команду или docker-compose-манифест.*
 
+<details><summary><em>docker-compose.yml</em></summary>
+
+```bash
+version: "3.7"
+
+volumes:
+  data: {}
+  backup: {}
+
+services:
+  postgres:
+    container_name: psql
+    image: postgres:12
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: "passwd"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - ./:/var/lib/postgresql/data
+      - ./backup:/var/lib/postgresql/backup
+    ports:
+      - "0.0.0.0:5432:5432"
+```
+
+</details>
+
 ***
 
 ## Задание 2
