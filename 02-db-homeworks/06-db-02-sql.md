@@ -10,7 +10,7 @@
 
 *Приведите получившуюся команду или docker-compose-манифест.*
 
-<details><summary><em>docker-compose.yml</em></summary>
+<details><summary><b>docker-compose.yml</b></summary>
 
 ```bash
 version: "3.7"
