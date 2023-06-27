@@ -64,15 +64,34 @@ drwxr-xr-x 4     1000     1000 4096 Jun 27 12:19 data
 
 ## Задание 2
 
-<details><summary><em>В БД из задачи 1:</em></summary>
+<em>В БД из задачи 1:</em>
 
  + создайте пользователя test-admin-user и БД test_db;
+
+```bash
+# su - postgres
+postgres@c10e7549b26a:~$ psql
+psql (12.15 (Debian 12.15-1.pgdg120+1))
+Type "help" for help.
+
+postgres=# CREATE USER "test-admin-user" WITH PASSWORD 'passwd';
+CREATE ROLE
+postgres=# CREATE DATABASE test_db;
+CREATE DATABASE
+postgres=# \c test_db
+You are now connected to database "test_db" as user "postgres".
+test_db=# 
+```
+
  + в БД test_db создайте таблицу orders и clients (спeцификация таблиц ниже);
+
+```bash
+
+```
+
  + предоставьте привилегии на все операции пользователю test-admin-user на таблицы БД test_db;
  + создайте пользователя test-simple-user;
  + предоставьте пользователю test-simple-user права на SELECT/INSERT/UPDATE/DELETE этих таблиц БД test_db.
-
-</details>
 
 <details><summary><em>Таблица orders:</em></summary>
 
