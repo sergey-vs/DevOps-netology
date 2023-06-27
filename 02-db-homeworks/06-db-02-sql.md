@@ -37,7 +37,16 @@ services:
 </details>
 
 ```bash
-etology@deb11-vm1:~/docker$ docker ps
+netology@deb11-vm1:~/docker$ docker-compose build && docker-compose up -d
+[+] Running 14/14
+ ⠿ postgres Pulled                                                                                                                                                                                                        22.4s
+   ⠿ 5b5fe70539cd Pull complete                                                                                                                                                                                            7.0s
+   ...
+   ⠿ f542e36db272 Pull complete                                                                                                                                                                                           18.8s
+[+] Running 2/2
+ ⠿ Network docker_default  Created                                                                                                                                                                                         0.0s
+ ⠿ Container psql          Started     
+netology@deb11-vm1:~/docker$ docker ps
 CONTAINER ID   IMAGE         COMMAND                  CREATED         STATUS         PORTS                    NAMES
 c10e7549b26a   postgres:12   "docker-entrypoint.s…"   3 minutes ago   Up 3 minutes   0.0.0.0:5432->5432/tcp   psql
 netology@deb11-vm1:~/docker$ docker exec -it psql sh
