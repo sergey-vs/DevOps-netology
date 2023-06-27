@@ -271,6 +271,11 @@ test_db-# \dp
  |Гитара| 4000|
 
 </details>
+
+```bash
+test_db=# INSERT INTO public.orders (наименование, цена) VALUES('Шоколад', 10),('Принтер', 3000),('Книга', 500),('Монитор', 7000),('Гитара', 4000);
+INSERT 0 5
+```
  
 <details><summary><em>Таблица clients</em></summary>
 
@@ -283,6 +288,12 @@ test_db-# \dp
  |Ritchie Blackmore| Russia|
  
 </details>
+
+```bash
+test_db=# INSERT INTO public.clients (фамилия, страна_проживания) VALUES('Иванов Иван Иванович', 'USA'),('Петров Петр Петрович', 'Canada'),('Иоганн Себастьян Бах', 'Japan'),('�онни Джеймс Дио', 'Russia'),('Ritchie Blackmore', 'Russia');
+
+INSERT 0 5
+```
 
 *Используя SQL-синтаксис*:
 
