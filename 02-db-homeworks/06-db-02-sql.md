@@ -190,7 +190,69 @@ Foreign-key constraints:
 ```
  + SQL-запрос для выдачи списка пользователей с правами над таблицами test_db;
 
+`SELECT * from information_schema.table_privileges WHERE table_catalog ILIKE 'test_db%' and table_schema ILIKE 'public';`
+
  + список пользователей с правами над таблицами test_db.
+
+```bash
+test_db=# SELECT * from information_schema.table_privileges WHERE table_catalog ILIKE 'test_db%' and table_schema ILIKE 'public';
+ grantor  |     grantee      | table_catalog | table_schema | table_name | privilege_type | is_grantable | with_hierarchy 
+----------+------------------+---------------+--------------+------------+----------------+--------------+----------------
+ postgres | postgres         | test_db       | public       | orders     | INSERT         | YES          | NO
+ postgres | postgres         | test_db       | public       | orders     | SELECT         | YES          | YES
+ postgres | postgres         | test_db       | public       | orders     | UPDATE         | YES          | NO
+ postgres | postgres         | test_db       | public       | orders     | DELETE         | YES          | NO
+ postgres | postgres         | test_db       | public       | orders     | TRUNCATE       | YES          | NO
+ postgres | postgres         | test_db       | public       | orders     | REFERENCES     | YES          | NO
+ postgres | postgres         | test_db       | public       | orders     | TRIGGER        | YES          | NO
+ postgres | test-admin-user  | test_db       | public       | orders     | INSERT         | NO           | NO
+ postgres | test-admin-user  | test_db       | public       | orders     | SELECT         | NO           | YES
+ postgres | test-admin-user  | test_db       | public       | orders     | UPDATE         | NO           | NO
+ postgres | test-admin-user  | test_db       | public       | orders     | DELETE         | NO           | NO
+ postgres | test-admin-user  | test_db       | public       | orders     | TRUNCATE       | NO           | NO
+ postgres | test-admin-user  | test_db       | public       | orders     | REFERENCES     | NO           | NO
+ postgres | test-admin-user  | test_db       | public       | orders     | TRIGGER        | NO           | NO
+ postgres | test-simple-user | test_db       | public       | orders     | INSERT         | NO           | NO
+ postgres | test-simple-user | test_db       | public       | orders     | SELECT         | NO           | YES
+ postgres | test-simple-user | test_db       | public       | orders     | UPDATE         | NO           | NO
+ postgres | test-simple-user | test_db       | public       | orders     | DELETE         | NO           | NO
+ postgres | postgres         | test_db       | public       | clients    | INSERT         | YES          | NO
+ postgres | postgres         | test_db       | public       | clients    | SELECT         | YES          | YES
+ postgres | postgres         | test_db       | public       | clients    | UPDATE         | YES          | NO
+ postgres | postgres         | test_db       | public       | clients    | DELETE         | YES          | NO
+ postgres | postgres         | test_db       | public       | clients    | TRUNCATE       | YES          | NO
+ postgres | postgres         | test_db       | public       | clients    | REFERENCES     | YES          | NO
+ postgres | postgres         | test_db       | public       | clients    | TRIGGER        | YES          | NO
+ postgres | test-admin-user  | test_db       | public       | clients    | INSERT         | NO           | NO
+ postgres | test-admin-user  | test_db       | public       | clients    | SELECT         | NO           | YES
+ postgres | test-admin-user  | test_db       | public       | clients    | UPDATE         | NO           | NO
+ postgres | test-admin-user  | test_db       | public       | clients    | DELETE         | NO           | NO
+ postgres | test-admin-user  | test_db       | public       | clients    | TRUNCATE       | NO           | NO
+ postgres | test-admin-user  | test_db       | public       | clients    | REFERENCES     | NO           | NO
+ postgres | test-admin-user  | test_db       | public       | clients    | TRIGGER        | NO           | NO
+ postgres | test-simple-user | test_db       | public       | clients    | INSERT         | NO           | NO
+ postgres | test-simple-user | test_db       | public       | clients    | SELECT         | NO           | YES
+ postgres | test-simple-user | test_db       | public       | clients    | UPDATE         | NO           | NO
+ postgres | test-simple-user | test_db       | public       | clients    | DELETE         | NO           | NO
+(36 rows)
+
+test_db-# \dp                                                                                                                    
+                                           Access privileges
+ Schema |      Name      |   Type   |         Access privileges          | Column privileges | Policies 
+--------+----------------+----------+------------------------------------+-------------------+----------
+ public | clients        | table    | postgres=arwdDxt/postgres         +|                   | 
+        |                |          | "test-admin-user"=arwdDxt/postgres+|                   | 
+        |                |          | "test-simple-user"=arwd/postgres   |                   | 
+ public | clients_id_seq | sequence | postgres=rwU/postgres             +|                   | 
+        |                |          | "test-admin-user"=rwU/postgres     |                   | 
+ public | orders         | table    | postgres=arwdDxt/postgres         +|                   | 
+        |                |          | "test-admin-user"=arwdDxt/postgres+|                   | 
+        |                |          | "test-simple-user"=arwd/postgres   |                   | 
+ public | orders_id_seq  | sequence | postgres=rwU/postgres             +|                   | 
+        |                |          | "test-admin-user"=rwU/postgres     |                   | 
+(4 rows)
+
+```
 
 ***
 
