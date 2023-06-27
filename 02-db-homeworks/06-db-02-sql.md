@@ -12,7 +12,7 @@
 
 <details><summary><b>docker-compose.yml</b></summary>
 
-```bash
+```yml
 version: "3.7"
 
 volumes:
