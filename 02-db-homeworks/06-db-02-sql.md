@@ -86,12 +86,40 @@ test_db=#
  + в БД test_db создайте таблицу orders и clients (спeцификация таблиц ниже);
 
 ```bash
-
+test_db=# CREATE TABLE orders (id SERIAL PRIMARY KEY, наименование TEXT,  цена INT);
+CREATE TABLE
+test_db=# CREATE TABLE clients(id SERIAL PRIMARY KEY, фамилия TEXT, страна_проживания TEXT, заказ INT, CONSTRAINT fk_orders FOREIGN KEY (заказ) REFERENCES orders (id));
+CREATE TABLE
+test_db=# CREATE INDEX страна_проживания_idx ON clients(страна_проживания);
+CREATE INDEX
+test_db=# 
 ```
 
  + предоставьте привилегии на все операции пользователю test-admin-user на таблицы БД test_db;
+
+```bash
+test_db=# GRANT ALL PRIVILEGES ON DATABASE test_db TO "test-admin-user";
+GRANT
+test_db=# GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO "test-admin-user";
+GRANT
+test_db=# GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO "test-admin-user";
+GRANT
+```
+
  + создайте пользователя test-simple-user;
+
+```bash
+test_db=# CREATE USER "test-simple-user" WITH PASSWORD 'passwd';
+CREATE ROLE
+```
+
  + предоставьте пользователю test-simple-user права на SELECT/INSERT/UPDATE/DELETE этих таблиц БД test_db.
+
+```bash
+test_db=# GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO "test-simple-user";
+GRANT
+test_db=# 
+```
 
 <details><summary><em>Таблица orders:</em></summary>
 
