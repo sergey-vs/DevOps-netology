@@ -138,14 +138,59 @@ test_db=#
 
 </details>
 
-<details><summary><em>Приведите:</em></summary>
+<em>Приведите:</em>
 
  + итоговый список БД после выполнения пунктов выше;
- + описание таблиц (describe);
- + SQL-запрос для выдачи списка пользователей с правами над таблицами test_db;
- + список пользователей с правами над таблицами test_db.
 
-</details>
+```bash
+test_db=# \list
+                                     List of databases
+   Name    |  Owner   | Encoding |  Collate   |   Ctype    |       Access privileges        
+-----------+----------+----------+------------+------------+--------------------------------
+ postgres  | postgres | UTF8     | en_US.utf8 | en_US.utf8 | 
+ template0 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres                   +
+           |          |          |            |            | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres                   +
+           |          |          |            |            | postgres=CTc/postgres
+ test_db   | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =Tc/postgres                  +
+           |          |          |            |            | postgres=CTc/postgres         +
+           |          |          |            |            | "test-admin-user"=CTc/postgres
+(4 rows)
+```
+
+ + описание таблиц (describe);
+
+```bash
+test_db=# \d orders
+                                     Table "public.orders"
+          Column          |  Type   | Collation | Nullable |              Default               
+--------------------------+---------+-----------+----------+------------------------------------
+ id                       | integer |           | not null | nextval('orders_id_seq'::regclass)
+ наименование             | text    |           |          | 
+ цена                     | integer |           |          | 
+Indexes:
+    "orders_pkey" PRIMARY KEY, btree (id)
+Referenced by:
+    TABLE "clients" CONSTRAINT "fk_orders" FOREIGN KEY ("заказ") REFERENCES orders(id)
+
+test_db=# \d clients
+                                          Table "public.clients"
+              Column               |  Type   | Collation | Nullable |               Default               
+-----------------------------------+---------+-----------+----------+-------------------------------------
+ id                                | integer |           | not null | nextval('clients_id_seq'::regclass)
+ фамилия                           | text    |           |          | 
+ страна_проживания                 | text    |           |          | 
+ заказ                             | integer |           |          | 
+Indexes:
+    "clients_pkey" PRIMARY KEY, btree (id)
+    "страна_проживания_idx" btree ("страна_проживания")
+Foreign-key constraints:
+    "fk_orders" FOREIGN KEY ("заказ") REFERENCES orders(id)
+
+```
+ + SQL-запрос для выдачи списка пользователей с правами над таблицами test_db;
+
+ + список пользователей с правами над таблицами test_db.
 
 ***
 
