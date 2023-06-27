@@ -36,6 +36,21 @@ services:
 
 </details>
 
+```bash
+etology@deb11-vm1:~/docker$ docker ps
+CONTAINER ID   IMAGE         COMMAND                  CREATED         STATUS         PORTS                    NAMES
+c10e7549b26a   postgres:12   "docker-entrypoint.s…"   3 minutes ago   Up 3 minutes   0.0.0.0:5432->5432/tcp   psql
+netology@deb11-vm1:~/docker$ docker exec -it psql sh
+# ls -la /var/lib/postgresql
+total 20
+drwxr-xr-x 1 postgres postgres 4096 Jun 27 12:19 .
+drwxr-xr-x 1 root     root     4096 Jun 14 21:34 ..
+drwxr-xr-x 2 root     root     4096 Jun 27 12:19 backup
+drwxr-xr-x 4     1000     1000 4096 Jun 27 12:19 data
+# 
+
+```
+
 ***
 
 ## Задание 2
