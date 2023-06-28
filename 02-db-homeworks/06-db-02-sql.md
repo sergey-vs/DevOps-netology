@@ -317,7 +317,7 @@ test_db=# select count(*) from clients;
 - запросы,
 - результаты их выполнения.
 
-```bash
+```sql
 test_db=# select * from orders;
  id | наименование | цена 
 ----+--------------------------+----------
@@ -357,7 +357,7 @@ test_db=# select * from clients;
 
 *Приведите SQL-запросы для выполнения этих операций*.
 
-```bash
+```sql
 test_db=# update clients set заказ =(select id from orders o where наименование='Книга') where фамилия ='Иванов Иван Иванович';
 UPDATE 1
 test_db=# update clients set заказ =(select id from orders o where наименование='Монитор') where фамилия ='Петров Петр Петрович';
@@ -377,7 +377,7 @@ test_db=# select * from clients;
 
 *Приведите SQL-запрос для выдачи всех пользователей, которые совершили заказ, а также вывод этого запроса*.
 
-```bash
+```sql
 test_db=# select * from clients c join orders o on c.заказ =o.id and c.заказ IS NOT NULL order by c.id;
  id |             фамилия             | страна_проживания | заказ | id | наименование | цена 
 ----+----------------------------------------+-----------------------------------+------------+----+--------------------------+----------
