@@ -37,29 +37,35 @@ services:
 </details>
 
 ```bash
-netology@deb11-vm1:~/docker$ docker-compose build && docker-compose up -d
-[+] Running 14/14
- ⠿ postgres Pulled                                                                                                                                                                                                        22.4s
-   ⠿ 5b5fe70539cd Pull complete                                                                                                                                                                                            7.0s
-   ...
-   ⠿ f542e36db272 Pull complete                                                                                                                                                                                           18.8s
-[+] Running 2/2
- ⠿ Network docker_default  Created                                                                                                                                                                                         0.0s
- ⠿ Container psql          Started     
-netology@deb11-vm1:~/docker$ docker ps
-CONTAINER ID   IMAGE         COMMAND                  CREATED         STATUS         PORTS                    NAMES
-c10e7549b26a   postgres:12   "docker-entrypoint.s…"   3 minutes ago   Up 3 minutes   0.0.0.0:5432->5432/tcp   psql
-netology@deb11-vm1:~/docker$ docker exec -it psql sh
-# ls -la /var/lib/postgresql
-total 20
-drwxr-xr-x 1 postgres postgres 4096 Jun 27 12:19 .
-drwxr-xr-x 1 root     root     4096 Jun 14 21:34 ..
-drwxr-xr-x 2 root     root     4096 Jun 27 12:19 backup
-drwxr-xr-x 4     1000     1000 4096 Jun 27 12:19 data
-# 
+┌──(sergey㉿kali)-[~/docker/dbtest]
+└─$ docker-compose build && docker-compose up -d
+postgres uses an image, skipping
+Creating network "dbtest_default" with the default driver
+Creating volume "dbtest_data" with default driver
+Creating volume "dbtest_backup" with default driver
+Pulling postgres (postgres:12)...
+12: Pulling from library/postgres
+5b5fe70539cd: Pull complete
+...
+99197f9b9881: Pull complete
+Digest: sha256:723e604853502af74506a537fda6c2301a0dc0cee39b2cbb73c03abd2aeed5a8
+Status: Downloaded newer image for postgres:12
+Creating psql ... done
 
+──(sergey㉿kali)-[~/docker/dbtest]                                                                                                                         
+└─$ docker ps -a                                                                                                                                            
+CONTAINER ID   IMAGE         COMMAND                  CREATED          STATUS          PORTS                    NAMES                                       
+319da3ce8ea4   postgres:12   "docker-entrypoint.s…"   17 seconds ago   Up 16 seconds   0.0.0.0:5432->5432/tcp   psql
+
+┌──(sergey㉿kali)-[~/docker/dbtest]                                                                                                                         
+└─$ docker exec -it psql sh                                                                                                                                 
+# ls -la /var/lib/postgresql                                                                                                                                
+total 20                                                                                                                                                    
+drwxr-xr-x 1 postgres postgres 4096 Jul  2 07:54 .                                                                                                          
+drwxr-xr-x 1 root     root     4096 Jun 14 21:34 ..                                                                                                         
+drwxr-xr-x 2 root     root     4096 Jul  2 07:54 backup                                                                                                     
+drwxr-xr-x 3 root     root     4096 Jul  2 07:54 data  
 ```
-
 ***
 
 ## Задание 2
@@ -70,14 +76,16 @@ drwxr-xr-x 4     1000     1000 4096 Jun 27 12:19 data
 
 ```bash
 # su - postgres
-postgres@c10e7549b26a:~$ psql
+postgres@319da3ce8ea4:~$ pdql
+-bash: pdql: command not found
+postgres@319da3ce8ea4:~$ psql
 psql (12.15 (Debian 12.15-1.pgdg120+1))
 Type "help" for help.
 
 postgres=# CREATE USER "test-admin-user" WITH PASSWORD 'passwd';
-CREATE ROLE
+ERROR:  role "test-admin-user" already exists
 postgres=# CREATE DATABASE test_db;
-CREATE DATABASE
+ERROR:  database "test_db" already exists
 postgres=# \c test_db
 You are now connected to database "test_db" as user "postgres".
 test_db=# 
@@ -430,10 +438,98 @@ test_db=# explain select * from clients c join orders o on c.заказ =o.id an
 
 *Создайте бэкап БД test_db и поместите его в volume, предназначенный для бэкапов (см. задачу 1).*
 
+```bash
+postgres@319da3ce8ea4:~$ exit
+logout
+# chown -R postgres:postgres /var/lib/postgresql/backup/
+#  ls -la /var/lib/postgresql/
+total 28
+drwxr-xr-x 1 postgres postgres 4096 Jul  2 08:04 .
+drwxr-xr-x 1 root     root     4096 Jun 14 21:34 ..
+drwxr-xr-x 2 postgres postgres 4096 Jul  2 07:54 backup
+-rw------- 1 postgres postgres   15 Jul  2 08:04 .bash_history
+drwxr-xr-x 3 root     root     4096 Jul  2 07:54 data
+-rw------- 1 postgres postgres 2181 Jul  2 08:03 .psql_history
+# su - postgres
+postgres@319da3ce8ea4:~$ cd /var/lib/postgresql/backup/
+postgres@319da3ce8ea4:~/backup$ pg_dumpall --database=test_db -c -U postgres | gzip > dump_test_db.gz
+postgres@319da3ce8ea4:~/backup$ pg_dump -Fd test_db -f dump_2023_07_02                               
+postgres@319da3ce8ea4:~/backup$ ls -la
+total 16
+drwxr-xr-x 3 postgres postgres 4096 Jul  2 08:05 .
+drwxr-xr-x 1 postgres postgres 4096 Jul  2 08:04 ..
+drwx------ 2 postgres postgres 4096 Jul  2 08:05 dump_2023_07_02
+-rw-r--r-- 1 postgres postgres 2004 Jul  2 08:05 dump_test_db.gz
+```
+
 *Остановите контейнер с PostgreSQL, но не удаляйте volumes*.
+
+```bash
+┌──(sergey㉿kali)-[~/docker/dbtest]
+└─$ docker-compose stop                                                                                                                                     
+Stopping psql ... done
+```
 
 *Поднимите новый пустой контейнер с PostgreSQL*.
 
+```bash
+┌──(sergey㉿kali)-[~/docker/dbtest]
+└─$ docker run --name psql2 -e POSTGRES_PASSWORD=passwd -e PGDATA=/var/lib/postgresql/data/pgdata -d -v "$(pwd)/newdata":/var/lib/postgresql/data -v "/home/sergey/docker/dbtest/backup":/var/lib/postgresql/backup:rw postgres:12
+ad6ae862c3d84fad0c28fda601e33ada56e0b6a77410016ee31d175f7de2b78d
+┌──(sergey㉿kali)-[~/docker/dbtest]
+└─$ docker ps -a
+CONTAINER ID   IMAGE         COMMAND                  CREATED          STATUS                     PORTS      NAMES
+ad6ae862c3d8   postgres:12   "docker-entrypoint.s…"   23 seconds ago   Up 22 seconds              5432/tcp   psql2
+319da3ce8ea4   postgres:12   "docker-entrypoint.s…"   16 minutes ago   Exited (0) 7 minutes ago              psql
+```
+
 *Восстановите БД test_db в новом контейнере*.
 
+```bash
+──(sergey㉿kali)-[~/docker/dbtest]
+└─$ docker exec -it psql2 sh
+# su - postgres
+postgres@ad6ae862c3d8:~$ psql -U postgres -c 'create database test_db;'
+CREATE DATABASE
+postgres@ad6ae862c3d8:~$ cd backup/
+postgres@ad6ae862c3d8:~/backup$ ls
+dump_2023_07_02  dump_test_db.gz
+postgres@ad6ae862c3d8:~/backup$ gzip -d dump_test_db.gz
+postgres@ad6ae862c3d8:~/backup$ psql -U postgres -W test_db < dump_test_db
+Password: 
+SET
+...
+
+GRANT
+postgres@ad6ae862c3d8:~/backup$ psql -h localhost -U test-admin-user test_db
+psql (12.15 (Debian 12.15-1.pgdg120+1))
+Type "help" for help.
+
+test_db=> \list
+                                     List of databases
+   Name    |  Owner   | Encoding |  Collate   |   Ctype    |       Access privileges        
+-----------+----------+----------+------------+------------+--------------------------------
+ postgres  | postgres | UTF8     | en_US.utf8 | en_US.utf8 | 
+ template0 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres                   +
+           |          |          |            |            | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | postgres=CTc/postgres         +
+           |          |          |            |            | =c/postgres
+ test_db   | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =Tc/postgres                  +
+           |          |          |            |            | postgres=CTc/postgres         +
+           |          |          |            |            | "test-admin-user"=CTc/postgres
+(4 rows)
+
+test_db=> SELECT c.* FROM clients c JOIN orders o ON c.заказ = o.id;
+ id |             фамилия             | страна_проживания | заказ 
+----+----------------------------------------+-----------------------------------+------------
+  2 | Петров Петр Петрович | Canada                            |          4
+  1 | Иванов Иван Иванович | USA                               |          3
+  3 | Иоганн Себастьян Бах | Japan                             |          5
+(3 rows)
+
+test_db=> exit
+postgres@ad6ae862c3d8:~/backup$ psql -h localhost -U test-admin-user test_db
+
+
+```
 *Приведите список операций, который вы применяли для бэкапа данных и восстановления*.
