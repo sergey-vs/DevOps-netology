@@ -26,9 +26,11 @@ services:
     restart: always
     environment:
       POSTGRES_PASSWORD: "passwd"
-      PGDATA: "/var/lib/postgresql/data/pgdata"
+      POSTGRES_USER: "test-admin-user"
+      POSTGRES_DB: "test_db"
+      PGDATA: "/var/lib/postgresql/data/pgdata"     
     volumes:
-      - ./:/var/lib/postgresql/data
+      - ./data:/var/lib/postgresql/data
       - ./backup:/var/lib/postgresql/backup
     ports:
       - "0.0.0.0:5432:5432"
