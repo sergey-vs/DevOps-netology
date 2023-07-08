@@ -10,7 +10,7 @@
 
  6.4 [PostgreSQL](./06-db-04-postgresql.md)
 
- 6.5 [PostgreSQL](./06-db-05-elasticsearch.md)
+ 6.5 [Elasticsearch](./06-db-05-elasticsearch.md)
 
  6.6 [Troubleshooting](./06-db-06-troobleshooting.md)
 
