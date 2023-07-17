@@ -8,6 +8,20 @@
 
 *Используя Docker, поднимите инстанс MySQL (версию 8). Данные БД сохраните в volume*.
 
+```bash
+┌──(sergey㉿kali)-[~/docker/mysqltest]
+└─$ docker-compose build && docker-compose up -d
+mysqldb uses an image, skipping
+Creating network "mysqltest_default" with the default driver
+Pulling mysqldb (mysql/mysql-server:8.0)...
+8.0: Pulling from mysql/mysql-server
+...
+Digest: sha256:d6c8301b7834c5b9c2b733b10b7e630f441af7bc917c74dba379f24eeeb6a313
+Status: Downloaded newer image for mysql/mysql-server:8.0
+Creating mysqltest_mysqldb_1 ... done
+
+```
+
 *Изучите бэкап БД и восстановитесь из него*.
 
 *Перейдите в управляющую консоль `mysql` внутри контейнера*.
