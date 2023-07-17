@@ -21,8 +21,7 @@ Status: Downloaded newer image for mysql/mysql-server:8.0
 Creating mysqltest_mysqldb_1 ... done
 
 ```
-
-*Изучите [бэкап БД](.src/603/test_dump.sql) и восстановитесь из него*.
+*Изучите [бэкап БД](src/603/test_dump.sql) и восстановитесь из него*.
 
 *Перейдите в управляющую консоль `mysql` внутри контейнера*.
 
