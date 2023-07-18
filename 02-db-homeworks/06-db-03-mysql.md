@@ -22,9 +22,38 @@ Creating mysqltest_mysqldb_1 ... done
 
 ```
 *Изучите [бэкап БД](src/603/test_dump.sql) и восстановитесь из него*.
-
 *Перейдите в управляющую консоль `mysql` внутри контейнера*.
 
+```bash
+┌──(sergey㉿kali)-[~/docker/mysqltest/restore]
+└─$ docker ps -a                                                                                                                           
+CONTAINER ID   IMAGE                    COMMAND                  CREATED        STATUS                    PORTS                                                        NAMES
+5f763e36900c   mysql/mysql-server:8.0   "/entrypoint.sh mysq…"   26 hours ago   Up 27 minutes (healthy)   0.0.0.0:3306->3306/tcp, :::3306->3306/tcp, 33060-33061/tcp   mysqltest_mysqldb_1
+
+┌──(sergey㉿kali)-[~/docker/mysqltest/restore]
+└─$ docker exec -it mysqltest_mysqldb_1 sh
+sh-4.4# mysql -u mysql_adm -p test_db < /var/lib/mysql-restore/test_dump.sql 
+Enter password: 
+sh-4.4# mysql -u mysql_adm -p test_db
+Enter password: 
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 71
+Server version: 8.0.32 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> 
+
+```
 *Используя команду `\h`, получите список управляющих команд*.
 
 *Подключитесь к восстановленной БД и получите список таблиц из этой БД*.
