@@ -194,18 +194,128 @@ mysql> select * from information_schema.user_attributes where user like '%test%'
 
 *Установите профилирование `SET profiling = 1`. Изучите вывод профилирования команд `SHOW PROFILES;`*.
 
-*Исследуйте, `какой engine` используется в таблице БД `test_db` и приведите в ответе*.
+```bash
+mysql> SET profiling = 1;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> show profiles;
++----------+------------+---------------------------------------------------------------------------+
+| Query_ID | Duration   | Query                                                                     |
++----------+------------+---------------------------------------------------------------------------+
+|        1 | 0.00062925 | SHOW DATABASES                                                            |
+|        2 | 0.00078000 | SHOW TABLES                                                               |
+|        3 | 0.00028300 | select * from orders where price >300                                     |
+|        4 | 0.00035500 | select * from information_schema.user_attributes where user like '%test%' |
+|        5 | 0.00012600 | SET profiling = 1                                                         |
++----------+------------+---------------------------------------------------------------------------+
+5 rows in set, 1 warning (0.00 sec)
+
+```
+
+*Исследуйте, какой `engine` используется в таблице БД `test_db` и приведите в ответе*.
+
+```bash
+mysql>  SELECT TABLE_NAME, ENGINE FROM information_schema.TABLES where TABLE_SCHEMA = 'test_db';
++------------+--------+
+| TABLE_NAME | ENGINE |
++------------+--------+
+| orders     | InnoDB |
++------------+--------+
+1 row in set (0.00 sec)
+
+```
 
 *Измените `engine` и приведите время выполнения и запрос на изменения из профайлера в ответе*:
 
  - на `MyISAM`,
  - на `InnoDB`.
 
+```bash
+mysql> ALTER TABLE orders ENGINE = MyIsam;
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> SELECT TABLE_NAME, ENGINE FROM information_schema.TABLES where TABLE_SCHEMA = 'test_db';
++------------+--------+
+| TABLE_NAME | ENGINE |
++------------+--------+
+| orders     | MyISAM |
++------------+--------+
+1 row in set (0.00 sec)
+
+mysql> ALTER TABLE orders ENGINE = InnoDB;
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> SELECT TABLE_NAME, ENGINE FROM information_schema.TABLES where TABLE_SCHEMA = 'test_db';
++------------+--------+
+| TABLE_NAME | ENGINE |
++------------+--------+
+| orders     | InnoDB |
++------------+--------+
+1 row in set (0.00 sec)
+
+mysql> SHOW PROFILES;
++----------+------------+-----------------------------------------------------------------------------------------+
+| Query_ID | Duration   | Query                                                                                   |
++----------+------------+-----------------------------------------------------------------------------------------+
+|        1 | 0.00062925 | SHOW DATABASES                                                                          |
+|        2 | 0.00078000 | SHOW TABLES                                                                             |
+|        3 | 0.00028300 | select * from orders where price >300                                                   |
+|        4 | 0.00035500 | select * from information_schema.user_attributes where user like '%test%'               |
+|        5 | 0.00012600 | SET profiling = 1                                                                       |
+|        6 | 0.00069825 | SELECT TABLE_NAME, ENGINE FROM information_schema.TABLES where TABLE_SCHEMA = 'test_db' |
+|        7 | 0.00870075 | ALTER TABLE orders ENGINE = MyIsam                                                      |
+|        8 | 0.00077625 | SELECT TABLE_NAME, ENGINE FROM information_schema.TABLES where TABLE_SCHEMA = 'test_db' |
+|        9 | 0.01066700 | ALTER TABLE orders ENGINE = InnoDB                                                      |
+|       10 | 0.00076625 | SELECT TABLE_NAME, ENGINE FROM information_schema.TABLES where TABLE_SCHEMA = 'test_db' |
++----------+------------+-----------------------------------------------------------------------------------------+
+10 rows in set, 1 warning (0.00 sec)
+
+```
+
 ***
 
 ## Задание 4
 
 *Изучите файл `my.cnf` в директории* **/etc/mysql**.
+
+```bash
+sh-4.4# cat /etc/my.cnf
+# For advice on how to change settings please see
+# http://dev.mysql.com/doc/refman/8.0/en/server-configuration-defaults.html
+
+[mysqld]
+#
+# Remove leading # and set to the amount of RAM for the most important data
+# cache in MySQL. Start at 70% of total RAM for dedicated server, else 10%.
+# innodb_buffer_pool_size = 128M
+#
+# Remove leading # to turn on a very important data integrity option: logging
+# changes to the binary log between backups.
+# log_bin
+#
+# Remove leading # to set options mainly useful for reporting servers.
+# The server defaults are faster for transactions and fast SELECTs.
+# Adjust sizes as needed, experiment to find the optimal values.
+# join_buffer_size = 128M
+# sort_buffer_size = 2M
+# read_rnd_buffer_size = 2M
+
+# Remove leading # to revert to previous value for default_authentication_plugin,
+# this will increase compatibility with older clients. For background, see:
+# https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_default_authentication_plugin
+# default-authentication-plugin=mysql_native_password
+skip-host-cache
+skip-name-resolve
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+secure-file-priv=/var/lib/mysql-files
+user=mysql
+
+pid-file=/var/run/mysqld/mysqld.pid
+
+```
 
 *Измените его согласно ТЗ (движок InnoDB)*:
 
