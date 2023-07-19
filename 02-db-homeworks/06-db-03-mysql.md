@@ -143,8 +143,51 @@ Bye
 
 *Предоставьте привелегии пользователю `test` на операции SELECT базы `test_db`*.
 
+```bash
+┌──(sergey㉿kali)-[~/docker]
+└─$ docker exec -it mysqltest_mysqldb_1 sh
+sh-4.4# mysql -u root -p test_db
+Enter password: 
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 21
+Server version: 8.0.32 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE USER
+    -> 'test'@'localhost' IDENTIFIED WITH mysql_native_password by 'test-pass'
+    -> PASSWORD EXPIRE INTERVAL 180 DAY
+    -> FAILED_LOGIN_ATTEMPTS 3
+    -> PASSWORD HISTORY 100
+    -> ATTRIBUTE '{"fname": "James","lname": "Pretty"}';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> GRANT SELECT ON test_db.* to 'test'@'localhost';
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+```
+
 *Используя таблицу **INFORMATION_SCHEMA.USER_ATTRIBUTES**, получите данные по пользователю `test` и приведите в ответе к задаче*.
  
+```bash
+mysql> select * from information_schema.user_attributes where user like '%test%';
++------+-----------+---------------------------------------+
+| USER | HOST      | ATTRIBUTE                             |
++------+-----------+---------------------------------------+
+| test | localhost | {"fname": "James", "lname": "Pretty"} |
++------+-----------+---------------------------------------+
+1 row in set (0.00 sec)
+
+```
 ***
 
 ## Задание 3
