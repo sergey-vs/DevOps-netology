@@ -330,7 +330,14 @@ pid-file=/var/run/mysqld/mysqld.pid
 sh-4.4# cat /etc/my.cnf
 [mysqld]
 
-default_authentication_plugin = mysql_native_password
+skip-host-cache
+skip-name-resolve
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+secure-file-priv=/var/lib/mysql-files
+user=mysql
+
+pid-file=/var/run/mysqld/mysqld.pid
 
 innodb_flush_method = O_DSYNC
 innodb_log_file_size = 100M
