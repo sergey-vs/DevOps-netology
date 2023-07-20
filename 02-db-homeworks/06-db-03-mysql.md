@@ -325,3 +325,16 @@ pid-file=/var/run/mysqld/mysqld.pid
  - буффер кеширования 30% от ОЗУ;
  - размер файла логов операций 100 Мб.
  - Приведите в ответе изменённый файл `my.cnf`.
+
+```bash
+sh-4.4# cat /etc/my.cnf
+[mysqld]
+
+default_authentication_plugin = mysql_native_password
+
+innodb_flush_method = O_DSYNC
+innodb_log_file_size = 100M
+innodb_file_per_table = ON
+innodb_log_buffer_size = 1M
+innodb_buffer_pool_size = 10M
+```
