@@ -8,6 +8,30 @@
 
 *Используя Docker, поднимите инстанс MySQL (версию 8). Данные БД сохраните в volume*.
 
+<details><summary><b>docker-compose.yml</b></summary>
+
+```yml
+version: "3.9"
+services:
+  mysqldb:
+    image: mysql/mysql-server:8.0
+    restart: always
+    environment:
+      MYSQL_USER: 'mysql_adm'
+      MYSQL_PASSWORD: '123'
+      MYSQL_DATABASE: 'test_db'
+      MYSQL_ROOT_PASSWORD: '123'
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./backup:/var/lib/mysql-backup
+      - ./restore:/var/lib/mysql-restore
+    ports:
+      - "3306:3306"
+
+```
+
+</details>
+
 ```bash
 ┌──(sergey㉿kali)-[~/docker/mysqltest]
 └─$ docker-compose build && docker-compose up -d
