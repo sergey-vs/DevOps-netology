@@ -3,7 +3,9 @@
 ## Задание 1
 
 *Используя **Docker**, поднимите инстанс **PostgreSQL** *(версию 13)*. *Данные БД сохраните в volume*.
+
 <details><summary><b>docker-compose.yml</b></summary>
+
 ```yml
 version: "3.7"
 
@@ -26,7 +28,7 @@ services:
     ports:
       - "0.0.0.0:5432:5432"
 ```
-</deails>
+</details>
 
 ```bash
 netology@deb11-vm1:~/docker/dbpsql$ docker-compose up -d
@@ -42,6 +44,7 @@ Digest: sha256:0f18de936266e03891e186db616e530e0e4365ef5fb300d4bb27318538b80604
 Status: Downloaded newer image for postgres:13
 Creating psql_1 ... done
 ```
+
 *Подключитесь к БД **PostgreSQL**, используя `psql`*.
 
 *Воспользуйтесь командой `\?` для вывода подсказки по имеющимся в `psql` управляющим командам*.
