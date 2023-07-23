@@ -2,7 +2,7 @@
 
 ## Задание 1
 
-*Используя **Docker**, поднимите инстанс **PostgreSQL** *(версию 13)*. *Данные БД сохраните в volume*.
+*Используя **Docker**, поднимите инстанс* **PostgreSQL** *(версию 13)*. *Данные БД сохраните в volume*.
 
 <details><summary><b>docker-compose.yml</b></summary>
 
