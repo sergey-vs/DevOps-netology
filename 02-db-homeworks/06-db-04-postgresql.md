@@ -4,6 +4,20 @@
 
 *Используя **Docker**, поднимите инстанс **PostgreSQL** *(версию 13)*. *Данные БД сохраните в volume*.
 
+```bash
+netology@deb11-vm1:~/docker/dbpsql$ docker-compose up -d
+Creating network "dbpsql_default" with the default driver
+Creating volume "dbpsql_data" with default driver
+Creating volume "dbpsql_backup" with default driver
+Pulling postgres (postgres:13)...
+13: Pulling from library/postgres
+faef57eae888: Pull complete
+...
+b8dec84b144c: Pull complete
+Digest: sha256:0f18de936266e03891e186db616e530e0e4365ef5fb300d4bb27318538b80604
+Status: Downloaded newer image for postgres:13
+Creating psql_1 ... done
+```
 *Подключитесь к БД **PostgreSQL**, используя `psql`*.
 
 *Воспользуйтесь командой `\?` для вывода подсказки по имеющимся в `psql` управляющим командам*.
