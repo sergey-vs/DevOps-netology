@@ -242,6 +242,8 @@ root@6161b8e9df7b:/# pg_dump -U postgres -d test_database > /var/lib/postgresql/
 ```
 *Как бы вы доработали бэкап-файл, чтобы добавить уникальность значения столбца `title` для таблиц `test_database`*?
 
-```bash
+Я бы добавил свойство `UNIQUE`
 
+```sql
+ title character varying(80) NOT NULL UNIQUE
 ```
