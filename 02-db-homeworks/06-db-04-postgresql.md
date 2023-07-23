@@ -43,20 +43,55 @@ b8dec84b144c: Pull complete
 Digest: sha256:0f18de936266e03891e186db616e530e0e4365ef5fb300d4bb27318538b80604
 Status: Downloaded newer image for postgres:13
 Creating psql_1 ... done
+netology@deb11-vm1:~/docker/dbpsql$ docker ps -a
+CONTAINER ID   IMAGE         COMMAND                  CREATED          STATUS          PORTS                    NAMES
+6161b8e9df7b   postgres:13   "docker-entrypoint.s…"   13 minutes ago   Up 13 minutes   0.0.0.0:5432->5432/tcp   psql_1
+
 ```
 
 *Подключитесь к БД **PostgreSQL**, используя `psql`*.
 
+```bash
+netology@deb11-vm1:~/docker/dbpsql$ docker exec -it psql_1 bash
+root@6161b8e9df7b:/# psql -U postgres
+psql (13.11 (Debian 13.11-1.pgdg120+1))
+Type "help" for help.
+
+postgres=# 
+
+```
 *Воспользуйтесь командой `\?` для вывода подсказки по имеющимся в `psql` управляющим командам*.
 
 *Найдите и приведите управляющие команды для*:
 
  - вывода списка БД,
+
+```bash
+ \l[+]   [PATTERN]      list databases
+```
  - подключения к БД,
+
+```bash
+Connection
+  \c[onnect] {[DBNAME|- USER|- HOST|- PORT|-] | conninfo}
+                         connect to new database (currently "postgres")
+```
  - вывода списка таблиц,
+
+```bash
+\dt[S+] [PATTERN]      list tables
+```
  - вывода описания содержимого таблиц,
+
+```bash
+\d[S+]                 list tables, views, and sequences
+\d[S+]  NAME           describe table, view, sequence, or index
+```
  - выхода из psql.
 
+```bash
+\q                     quit psql
+```
 ***
 
 ## Задание 2
