@@ -98,14 +98,65 @@ Connection
 
 *Используя `psql`, создайте БД `test_database`*.
 
+```bash
+postgres=# CREATE DATABASE test_database;
+CREATE DATABASE
+```
 *Изучите [бэкап БД](./src/604/test_dump.sql)*.
 
 *Восстановите бэкап БД в `test_database`*.
 
+```bash
+root@6161b8e9df7b:/# psql -U postgres test_database < /var/lib/postgresql/backup/test_dump.sql 
+SET
+SET
+SET
+SET
+SET
+ set_config 
+------------
+ 
+(1 row)
+
+SET
+SET
+SET
+SET
+SET
+SET
+CREATE TABLE
+ALTER TABLE
+CREATE SEQUENCE
+ALTER TABLE
+ALTER SEQUENCE
+ALTER TABLE
+COPY 8
+ setval 
+--------
+      8
+(1 row)
+
+ALTER TABLE
+```
 *Перейдите в управляющую консоль `psql` внутри контейнера*.
 
 *Подключитесь к восстановленной БД и проведите операцию ANALYZE для сбора статистики по таблице*.
 
+```bash
+postgres=# \c test_database
+You are now connected to database "test_database" as user "postgres".
+test_database=# \dt+
+                              List of relations
+ Schema |  Name  | Type  |  Owner   | Persistence |    Size    | Description 
+--------+--------+-------+----------+-------------+------------+-------------
+ public | orders | table | postgres | permanent   | 8192 bytes | 
+(1 row)
+
+est_database=# ANALyZE VERBOSE public.orders;
+INFO:  analyzing "public.orders"
+INFO:  "orders": scanned 1 of 1 pages, containing 8 live rows and 0 dead rows; 8 rows in sample, 8 estimated total rows
+ANALYZE
+```
 *Используя таблицу [pg_stats](https://postgrespro.ru/docs/postgresql/12/view-pg-stats), найдите столбец таблицы `orders` с наибольшим средним значением размера элементов в байтах*.
 
 *Приведите в ответе команду, которую вы использовали для вычисления, и полученный результат*.
