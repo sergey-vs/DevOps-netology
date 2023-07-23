@@ -3,6 +3,30 @@
 ## Задание 1
 
 *Используя **Docker**, поднимите инстанс **PostgreSQL** *(версию 13)*. *Данные БД сохраните в volume*.
+<details><summary><b>docker-compose.yml</b></summary>
+```yml
+version: "3.7"
+
+volumes:
+  data: {}
+  backup: {}
+
+services:
+  postgres:
+    container_name: psql_1
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: "123"
+      POSTGERS_USER: "root"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - ./data:/var/lib/postgresql/data
+      - ./backup:/var/lib/postgresql/backup
+    ports:
+      - "0.0.0.0:5432:5432"
+```
+</deails>
 
 ```bash
 netology@deb11-vm1:~/docker/dbpsql$ docker-compose up -d
