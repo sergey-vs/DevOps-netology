@@ -161,6 +161,15 @@ ANALYZE
 
 *Приведите в ответе команду, которую вы использовали для вычисления, и полученный результат*.
 
+```bash
+test_database=# SELECT attname, avg_width from pg_stats WHERE tablename='orders'; 
+ attname | avg_width 
+---------+-----------
+ id      |         4
+ title   |        16
+ price   |         4
+(3 rows)
+```
 ***
 
 ## Задание 3
@@ -169,12 +178,70 @@ ANALYZE
 
 *Предложите SQL-транзакцию для проведения этой операции*.
 
+```bash
+test_database=# BEGIN;
+BEGIN
+test_database=*# CREATE TABLE orders_1 (LIKE orders);
+CREATE TABLE
+test_database=*# INSERT INTO orders_1 SELECT * FROM orders WHERE price >499;
+INSERT 0 3
+test_database=*# DELETE FROM orders WHERE price >499;
+DELETE 3
+test_database=*# CREATE TABLE orders_2 (LIKE orders);
+CREATE TABLE
+test_database=*# INSERT INTO orders_2 SELECT * FROM orders WHERE price <=499;
+INSERT 0 5
+test_database=*# DELETE FROM orders WHERE price <=499;
+DELETE 5
+test_database=*# COMMIT;
+COMMIT
+test_database=# SELECT * FROM public.orders;
+ id | title | price 
+----+-------+-------
+(0 rows)
+
+test_database=# SELECT * FROM public.orders_1;
+ id |       title        | price 
+----+--------------------+-------
+  2 | My little database |   500
+  6 | WAL never lies     |   900
+  8 | Dbiezdmin          |   501
+(3 rows)
+
+test_database=# SELECT * FROM public.orders_2;
+ id |        title         | price 
+----+----------------------+-------
+  1 | War and peace        |   100
+  3 | Adventure psql time  |   300
+  4 | Server gravity falls |   300
+  5 | Log gossips          |   123
+  7 | Me and my bash-pet   |   499
+(5 rows)
+
+test_database=# \dt
+          List of relations
+ Schema |   Name   | Type  |  Owner   
+--------+----------+-------+----------
+ public | orders   | table | postgres
+ public | orders_1 | table | postgres
+ public | orders_2 | table | postgres
+(3 rows)
+
+```
 *Можно ли было изначально исключить ручное разбиение при проектировании таблицы orders*?
 
+Ответ: "ручного" разбиения можно было избежать при проектировании таблицы путём введения секционирования до внесения данных в таблицу.
 
 
 ## Задание 4
 
 *Используя утилиту `pg_dump`, создайте бекап БД `test_database`*.
 
+```bash
+root@6161b8e9df7b:/# pg_dump -U postgres -d test_database > /var/lib/postgresql/backup/test_database_dump.sql
+```
 *Как бы вы доработали бэкап-файл, чтобы добавить уникальность значения столбца `title` для таблиц `test_database`*?
+
+```bash
+
+```
