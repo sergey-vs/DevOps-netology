@@ -3,7 +3,7 @@
 
 7.1 [Ввдение в Terraform](./07-ter-01.md)
 
-7.2 [Основы Terraform. Yandex Cloud]()
+7.2 [Основы Terraform. Yandex Cloud](./07-ter-02.md)
 
 7.3 [Управляющие конструкции в коде Terraform]()
 
