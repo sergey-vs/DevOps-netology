@@ -82,62 +82,34 @@ ubuntu@fhmblgms656uqssdn8kv:~$ hostnamectl
     Virtualization: kvm
   Operating System: Ubuntu 20.04.6 LTS
 
-```
+   07-ter-02.md ``` ``` </details>
 
-</details>
-
-+ ответы на вопросы.
-
-	- Ошибка в `platform_id = "standart-v4` исправленно на `platform_id = "standard-v1` и исправленны минимальные требования для параметра **cores**.
-	- Параметр `preemptible = true` для виртуальных машин которые могут быть принудительно остановлены в любой момент.
-	- Параметр `core_fraction=5`  задает базовую производительность для ядра в процентах
-
-***
++ ответы на вопросы. </details> - Ошибка в `platform_id = "standart-v4` исправленно на `platform_id = "standard-v1` и исправленны минимальные 
+	требования для параметра **cores**. - Параметр `preemptible = true` для виртуальных машин которые могут быть принудительно остановлены 
+	в любой момент. - Параметр `core_fraction=5` задает базовую производительность для ядра в процентах
++ ответы на вопросы. ***
 
 ## Задание 2
-
-1. Изучите файлы проекта.
-2. Замените все хардкод-значения для ресурсов yandex_compute_image и yandex_compute_instance на отдельные переменные.
- К названиям переменных ВМ добавьте в начало префикс vm_web_ . Пример: **vm_web_name**.
-<details><summary><b>yandex_compute_image</b></summary>
-data "yandex_compute_image" "ubuntu" {
-  family = var.vm_web_family
-}
-</details>
-
-<details><summary><b>yandex_compute_instance</b></summary>
-resource "yandex_compute_instance" "platform" {
-  name        = var.vm_web_name
-  platform_id = var.vm_web_platform_id
-  resources {
-    cores         = var.vm_web_cores
-    memory        = var.vm_web_ram
-    core_fraction = var.vm_web_core_fraction
-  }
-</details>
-3. Объявите нужные переменные в файле variables.tf, обязательно указывайте тип переменной. Заполните их **default** прежними значениями из main.tf.
-4. Проверьте terraform plan. Изменений быть не должно.
-
-***
+        - Ошибка в `platform_id = "standart-v4` исправленно на `platform_id = "standard-v1` и исправленны минимальные требования для параметра 
+**core> 1. Изучите файлы проекта. 2. Замените все хардкод-значения для ресурсов yandex_compute_image и yandex_compute_instance на отдельные 
+переменные.
+        - Параметр `preemptible = true` для виртуальных машин которые могут быть принудительно остановлены в любой момент. К названиям 
+переменных ВМ добавьте в начало префикс vm_web_ . Пример: **vm_web_name**. 3. Объявите нужные переменные в файле variables.tf, обязательно 
+указывайте тип переменной. Заполните их **default** прежними значениями из main.tf. 4. Проверьте terraform plan. Изменений быть не должно.
+        - Параметр `core_fraction=5` задает базовую производительность для ядра в процентах ***
 
 ## Задание 3
+*** 1. Создайте в корне проекта файл 'vms_platform.tf' . Перенесите в него все переменные первой ВМ. 2. Скопируйте блок ресурса и создайте с 
+его помощью вторую ВМ в файле
+ main.tf: "netology-develop-platform-db" cores = 2 memory = 2 core_fraction = 20.  Объявите её переменные с префиксом vm_db_ в том же файле 
+ ('vms_platform.tf').
+## Задание 23. Примените изменения.
 
-1. Создайте в корне проекта файл 'vms_platform.tf' . Перенесите в него все переменные первой ВМ.
-2. Скопируйте блок ресурса и создайте с его помощью вторую ВМ в файле  
- main.tf: "netology-develop-platform-db"  
- cores = 2  
- memory = 2  
- core_fraction = 20.  
- Объявите её переменные с префиксом vm_db_ в том же файле ('vms_platform.tf').
-3. Примените изменения.
-
-***
-
-## Задание 4
-
- 1. Объявите в файле outputs.tf output типа map, содержащий { instance_name = external_ip } для каждой из ВМ. 
- 2. Примените изменения.
-В качестве решения приложите вывод значений ip-адресов команды `terraform output`.
+*** 1. Изучите файлы проекта. 2. Замените все хардкод-значения для ресурсов yandex_compute_image и yandex_compute_instance на отдельные 
+переменные.## Задание 4
+ К названиям переменных ВМ добавьте в начало префикс vm_web_ . Пример: **vm_web_name**. 1. Объявите в файле outputs.tf output типа map, 
+ содержащий { instance_name = external_ip } для каждой из ВМ. 2. Примените изменения.
+3. Объявите нужные переменные в файле variables.tf, обязательно указыВ качестве решения приложите вывод значений ip-адресов команды `terraform output`.
 
 ***
 
