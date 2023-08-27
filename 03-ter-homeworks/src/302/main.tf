@@ -15,9 +15,9 @@ resource "yandex_compute_instance" "platform" {
   name        = local.name_web
   platform_id = var.vm_web_platform_id
   resources  {
-    cores         = var.vm_web_cores
-    memory        = var.vm_web_ram
-    core_fraction = var.vm_web_core_fraction
+    cores         = var.vm_web_resources["cores"]
+    memory        = var.vm_web_resources["memory"]
+    core_fraction = var.vm_web_resources["core_fraction"]
   }
 
   boot_disk {
@@ -33,16 +33,20 @@ resource "yandex_compute_instance" "platform" {
     nat       = true
   }
 
-  metadata = local.metadata
+  metadata  = {
+    serial-port-enable = var.metadata["serial-port-enable"]
+    ssh-keys           = "ubuntu:${var.metadata["ssh_root_key"]}"
+  }
+
 }
 
 resource "yandex_compute_instance" "platform-db" {
   name        = local.name_db
   platform_id = var.vm_db_platform_id
   resources    {
-    cores         = var.vm_db_cores
-    memory        = var.vm_db_ram
-    core_fraction = var.vm_db_core_fraction
+    cores         = var.vm_db_resources["cores"]
+    memory        = var.vm_db_resources["memory"]
+    core_fraction = var.vm_db_resources["core_fraction"]
   }
 
   boot_disk {
@@ -58,5 +62,9 @@ resource "yandex_compute_instance" "platform-db" {
     nat       = true
   }
 
-  metadata = local.metadata
+  metadata  = {
+    serial-port-enable = var.metadata["serial-port-enable"]
+    ssh-keys           = "ubuntu:${var.metadata["ssh_root_key"]}"
+  }
+
 }
