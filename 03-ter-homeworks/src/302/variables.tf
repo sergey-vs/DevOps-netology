@@ -37,12 +37,23 @@ variable "vm_web_family" {
   description = ""
 }
 
+variable "vm_name" {
+  type =  string
+  default = "netology-develop-platform"
+  description = "name of a VM"
+}
 
+variable "vm_web_role" {
+    type        = string
+    default     = "web"
+}
+
+/*
 variable "vm_web_name" {
   type        = string
   default     = "netology-develop-platform-web"
   description = "name of a VM (only lower case latters)"
-}
+}*/
 
 /*
 variable "vm_web_cores" { 

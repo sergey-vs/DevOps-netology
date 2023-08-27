@@ -1,8 +1,22 @@
+/* # не используеммые переменные
 variable "vm_db_name" {
   type        = string
   default     = "netology-develop-platform-db"
   description = "name of a VM (only lower case latters)"
 }
+*/
+
+variable "vm_name" {
+  type =  string
+  default = "netology-develop-platform"
+  description = "name of a VM"
+}
+
+variable "vm_web_role" {
+    type        = string
+    default     = "web"
+}
+
 variable "vm_db_platform_id" {
   type        = string
   default     = "standard-v1"
@@ -10,6 +24,7 @@ variable "vm_db_platform_id" {
 }
 
 
+/* # не используеммые переменные
  variable "vm_db_cores" { 
   type        = number
   default     = "2"
@@ -27,3 +42,4 @@ variable "vm_db_core_fraction" {
   type        = number
   default     = "20"
 }
+*/
