@@ -7,7 +7,7 @@
 
 ## :fist: [Облачная инфраструктура. Terraform](./03-ter-homeworks/README.md)
 
-## :point_down: [Система управления конфигурациями](./04-ter-homeworks/README.md)
+## :point_down: [Система управления конфигурациями](./04-ansible-homeworks/README.md)
 
 ## :point_right: [Непрерывная разработка и интеграция](/05-ter-homeworks/README.md)
 
