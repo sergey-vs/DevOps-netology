@@ -7,10 +7,10 @@
 
 ## :fist: [Облачная инфраструктура. Terraform](./03-ter-homeworks/README.md)
 
-## :point_down:
+## :point_down: [Система управления конфигурациями](./04-ter-homeworks/README.md)
 
-## :point_right:
+## :point_right: [Непрерывная разработка и интеграция](/05-ter-homeworks/README.md)
 
-## :wave:
+## :wave: [Мониторинг и логи](/06-ter-homeworks/README.md)
 
-## :thumbsdown:
+## :thumbsdown: [Микросервисы](/07-ter-homeworks/README.md)
