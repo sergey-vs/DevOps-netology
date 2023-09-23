@@ -168,8 +168,6 @@ ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    s
 
  7. При помощи `ansible-vault` зашифруйте факты в `group_vars/deb` и `group_vars/el` с паролем `netology`.
 
-<details><summary><b>Terminal</b></summary>
-
 ```bash
 ┌──(sergey㉿kali)-[~/ansible/hw_ans1/playbook]
 └─$ ansible-vault encrypt group_vars/deb/examp.yml
@@ -183,14 +181,41 @@ New Vault password:
 Confirm New Vault password: 
 Encryption successful
 ```
-</details>
 
  8. Запустите playbook на окружении `prod.yml`. При запуске `ansible` должен запросить у вас пароль. Убедитесь в работоспособности.
 
 <details><summary><b>Terminal</b></summary>
 
 ```bash
+┌──(sergey㉿kali)-[~/ansible/hw_ans1/playbook]
+└─$ ansible-playbook -i inventory/prod.yml site.yml --ask-vault-pass
+Vault password: 
 
+PLAY [Print os facts] ********************************************************************************************************
+
+TASK [Gathering Facts] *******************************************************************************************************
+ok: [ubuntu]
+ok: [centos7]
+
+TASK [Print OS] **************************************************************************************************************
+ok: [centos7] => {
+    "msg": "CentOS"
+}
+ok: [ubuntu] => {
+    "msg": "Ubuntu"
+}
+
+TASK [Print fact] ************************************************************************************************************
+ok: [centos7] => {
+    "msg": "el default fact"
+}
+ok: [ubuntu] => {
+    "msg": "deb default fact"
+}
+
+PLAY RECAP *******************************************************************************************************************
+centos7                    : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 ```
 </details>
 
