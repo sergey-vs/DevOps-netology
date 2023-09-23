@@ -222,17 +222,31 @@ ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    s
 
  9. Посмотрите при помощи `ansible-doc` список плагинов для подключения. Выберите подходящий для работы на `control node`.
 
-```zsh
-Можем использовать команду `ansible-doc -t connection -l`
-Подойдет плагин `local`
-```
+
+ Можем использовать команду `ansible-doc -t connection -l`  
+ Подойдет плагин `local`
+
 
  10. В `prod.yml` добавьте новую группу хостов с именем `local`, в ней разместите localhost с необходимым типом подключения.
 
 <details><summary><b>Terminal</b></summary>
 
 ```bash
-
+┌──(sergey㉿kali)-[~/ansible/hw_ans1/playbook]
+└─$ cat inventory/prod.yml
+---
+  el:
+    hosts:
+      centos7:
+        ansible_connection: docker
+  deb:
+    hosts:
+      ubuntu:
+        ansible_connection: docker
+  local:
+    hosts:
+      localhost:
+        ansible_connection: local
 ```
 </details>
  
@@ -241,11 +255,45 @@ ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    s
 <details><summary><b>Terminal</b></summary>
 
 ```bash
+┌──(sergey㉿kali)-[~/ansible/hw_ans1/playbook]
+└─$ ansible-playbook -i inventory/prod.yml --ask-vault-pass site.yml
+Vault password: 
 
+PLAY [Print os facts] *****************************************************************************************
+
+TASK [Gathering Facts] ****************************************************************************************
+ok: [localhost]
+ok: [ubuntu]
+ok: [centos7]
+
+TASK [Print OS] ***********************************************************************************************
+ok: [localhost] => {
+    "msg": "Kali"
+}
+ok: [ubuntu] => {
+    "msg": "Ubuntu"
+}
+ok: [centos7] => {
+    "msg": "CentOS"
+}
+
+TASK [Print fact] *********************************************************************************************
+ok: [ubuntu] => {
+    "msg": "deb default fact"
+}
+ok: [centos7] => {
+    "msg": "el default fact"
+}
+ok: [localhost] => {
+    "msg": "all default fact"
+}
+
+PLAY RECAP ****************************************************************************************************
+centos7                    : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+localhost                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 ```
 </details>
-
- 12. Заполните `README.md` ответами на вопросы. Сделайте `git push` в ветку `master`. В ответе отправьте ссылку на ваш открытый репозиторий с изменённым `playbook` и заполненным `README.md`.
 
 ***
 
