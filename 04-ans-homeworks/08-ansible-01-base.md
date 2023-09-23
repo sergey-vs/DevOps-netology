@@ -229,8 +229,6 @@ ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    s
 
  10. В `prod.yml` добавьте новую группу хостов с именем `local`, в ней разместите localhost с необходимым типом подключения.
 
-<details><summary><b>Terminal</b></summary>
-
 ```bash
 ┌──(sergey㉿kali)-[~/ansible/hw_ans1/playbook]
 └─$ cat inventory/prod.yml
@@ -248,7 +246,6 @@ ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    s
       localhost:
         ansible_connection: local
 ```
-</details>
  
  11. Запустите playbook на окружении `prod.yml`. При запуске `ansible` должен запросить у вас пароль. Убедитесь, что факты `some_fact` для каждого из хостов определены из верных `group_vars`. 
 
