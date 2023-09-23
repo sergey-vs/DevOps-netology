@@ -121,7 +121,7 @@ ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    s
 
  5. Добавьте факты в `group_vars` каждой из групп хостов так, чтобы для `some_fact` получились значения: для `deb` — `deb default fact`, для `el` — `el default fact`.
 
-```bash
+```zsh
 ┌──(sergey㉿kali)-[~/ansible/hw_ans1/playbook]
 └─$ cat group_vars/{deb,el}/*
 ---
@@ -221,6 +221,11 @@ ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    s
 
 
  9. Посмотрите при помощи `ansible-doc` список плагинов для подключения. Выберите подходящий для работы на `control node`.
+
+```zsh
+Можем использовать `ansible-doc -t connection -l`
+Подойдет плагин `local`
+
  10. В `prod.yml` добавьте новую группу хостов с именем `local`, в ней разместите localhost с необходимым типом подключения.
 
 <details><summary><b>Terminal</b></summary>
