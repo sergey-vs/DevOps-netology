@@ -75,7 +75,7 @@ localhost                  : ok=3    changed=0    unreachable=0    failed=0    s
 ```bash
 docker run -d -i --name centos7 centos:7 /bin/bash
 ```
- + Ubuntu (установим python3, так как в базовой [сборке Ubuntu](https://hub.docker.com/_/ubuntu)Python нет):
+ + Ubuntu (установим python3, так как в базовой [сборке Ubuntu](https://hub.docker.com/_/ubuntu) Python нет):
 
 ```bash
 docker run -d -i --name ubuntu ubuntu /bin/bash
@@ -124,16 +124,89 @@ ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    s
 <details><summary><b>Terminal</b></summary>
 
 ```bash
-
+┌──(sergey㉿kali)-[~/ansible/hw_ans1/playbook]
+└─$ cat group_vars/{deb,el}/*
+---
+  some_fact: "deb default fact"---
+  some_fact: "el default fact"
 ```
 </details>
 
  6. Повторите запуск playbook на окружении `prod.yml`. Убедитесь, что выдаются корректные значения для всех хостов.
+
+<details><summary><b>Terminal</b></summary>
+
+```bash
+┌──(sergey㉿kali)-[~/ansible/hw_ans1/playbook]
+└─$ ansible-playbook -i inventory/prod.yml site.yml
+
+PLAY [Print os facts] ********************************************************************************************************
+
+TASK [Gathering Facts] *******************************************************************************************************
+ok: [ubuntu]
+ok: [centos7]
+
+TASK [Print OS] **************************************************************************************************************
+ok: [centos7] => {
+    "msg": "CentOS"
+}
+ok: [ubuntu] => {
+    "msg": "Ubuntu"
+}
+
+TASK [Print fact] ************************************************************************************************************
+ok: [centos7] => {
+    "msg": "el default fact"
+}
+ok: [ubuntu] => {
+    "msg": "deb default fact"
+}
+
+PLAY RECAP *******************************************************************************************************************
+centos7                    : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+```
+</details>
+
+
  7. При помощи `ansible-vault` зашифруйте факты в `group_vars/deb` и `group_vars/el` с паролем `netology`.
+
+<details><summary><b>Terminal</b></summary>
+
+```bash
+
+```
+</details>
+
  8. Запустите playbook на окружении `prod.yml`. При запуске `ansible` должен запросить у вас пароль. Убедитесь в работоспособности.
+
+<details><summary><b>Terminal</b></summary>
+
+```bash
+
+```
+</details>
+
+
  9. Посмотрите при помощи `ansible-doc` список плагинов для подключения. Выберите подходящий для работы на `control node`.
- 10. В `prod.yml` добавьте новую группу хостов с именем `local`, в ней разместите localhost с необходимым типом подключения. 
+ 10. В `prod.yml` добавьте новую группу хостов с именем `local`, в ней разместите localhost с необходимым типом подключения.
+
+<details><summary><b>Terminal</b></summary>
+
+```bash
+
+```
+</details>
+ 
  11. Запустите playbook на окружении `prod.yml`. При запуске `ansible` должен запросить у вас пароль. Убедитесь, что факты `some_fact` для каждого из хостов определены из верных `group_vars`. 
+
+<details><summary><b>Terminal</b></summary>
+
+```bash
+
+```
+</details>
+
  12. Заполните `README.md` ответами на вопросы. Сделайте `git push` в ветку `master`. В ответе отправьте ссылку на ваш открытый репозиторий с изменённым `playbook` и заполненным `README.md`.
 
 ***
