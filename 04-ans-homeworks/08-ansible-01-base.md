@@ -70,6 +70,57 @@ localhost                  : ok=3    changed=0    unreachable=0    failed=0    s
 
  3. Воспользуйтесь подготовленным (используется `docker`) или создайте собственное окружение для проведения дальнейших испытаний.
 
+ + Centos7:
+
+```bash
+docker run -d -i --name centos7 centos:7 /bin/bash
+```
+ + Ubuntu (установим python3, так как в базовой [сборке Ubuntu](https://hub.docker.com/_/ubuntu)Python нет):
+
+```bash
+docker run -d -i --name ubuntu ubuntu /bin/bash
+docker exec -it ubuntu apt-get update
+docker exec -it ubuntu apt-get install python3
+```
+
+ 4. Проведите запуск playbook на окружении из `prod.yml`. Зафиксируйте полученные значения `some_fact` для каждого из managed `host`.
+
+<details><summary><b>Terminal</b></summary>
+
+```bash
+┌──(sergey㉿kali)-[~/ansible/hw_ans1/playbook]
+└─$ ansible-playbook site.yml -i inventory/prod.yml
+
+PLAY [Print os facts] ********************************************************************************************************
+
+TASK [Gathering Facts] *******************************************************************************************************
+ok: [ubuntu]
+ok: [centos7]
+
+TASK [Print OS] **************************************************************************************************************
+ok: [centos7] => {
+    "msg": "CentOS"
+}
+ok: [ubuntu] => {
+    "msg": "Ubuntu"
+}
+
+TASK [Print fact] ************************************************************************************************************
+ok: [centos7] => {
+    "msg": "el"
+}
+ok: [ubuntu] => {
+    "msg": "deb"
+}
+
+PLAY RECAP *******************************************************************************************************************
+centos7                    : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+```
+</details>
+
+ 5. Добавьте факты в `group_vars` каждой из групп хостов так, чтобы для `some_fact` получились значения: для `deb` — `deb default fact`, для `el` — `el default fact`.
+
 <details><summary><b>Terminal</b></summary>
 
 ```bash
@@ -77,8 +128,6 @@ localhost                  : ok=3    changed=0    unreachable=0    failed=0    s
 ```
 </details>
 
- 4. Проведите запуск playbook на окружении из `prod.yml`. Зафиксируйте полученные значения `some_fact` для каждого из managed `host`.
- 5. Добавьте факты в `group_vars` каждой из групп хостов так, чтобы для `some_fact` получились значения: для `deb` — `deb default fact`, для `el` — `el default fact`.
  6. Повторите запуск playbook на окружении `prod.yml`. Убедитесь, что выдаются корректные значения для всех хостов.
  7. При помощи `ansible-vault` зашифруйте факты в `group_vars/deb` и `group_vars/el` с паролем `netology`.
  8. Запустите playbook на окружении `prod.yml`. При запуске `ansible` должен запросить у вас пароль. Убедитесь в работоспособности.
