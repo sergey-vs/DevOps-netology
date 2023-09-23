@@ -16,7 +16,7 @@
 
 <details><summary><b>Terminal</b></summary>
 
-```bash
+```zsh
 ┌──(sergey㉿kali)-[~/ansible/hw_ans1/playbook]
 └─$ ansible-playbook site.yml -i inventory/test.yml
 
@@ -44,7 +44,7 @@ localhost                  : ok=3    changed=0    unreachable=0    failed=0    s
 
 <details><summary><b>Terminal</b></summary>
 
-```bash
+```zsh
 ┌──(sergey㉿kali)-[~/ansible/hw_ans1/playbook]
 └─$ ansible-playbook site.yml -i inventory/test.yml
 
