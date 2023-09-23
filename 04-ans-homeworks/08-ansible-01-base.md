@@ -121,8 +121,6 @@ ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    s
 
  5. Добавьте факты в `group_vars` каждой из групп хостов так, чтобы для `some_fact` получились значения: для `deb` — `deb default fact`, для `el` — `el default fact`.
 
-<details><summary><b>Terminal</b></summary>
-
 ```bash
 ┌──(sergey㉿kali)-[~/ansible/hw_ans1/playbook]
 └─$ cat group_vars/{deb,el}/*
@@ -130,7 +128,6 @@ ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    s
   some_fact: "deb default fact"---
   some_fact: "el default fact"
 ```
-</details>
 
  6. Повторите запуск playbook на окружении `prod.yml`. Убедитесь, что выдаются корректные значения для всех хостов.
 
@@ -174,7 +171,17 @@ ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    s
 <details><summary><b>Terminal</b></summary>
 
 ```bash
+┌──(sergey㉿kali)-[~/ansible/hw_ans1/playbook]
+└─$ ansible-vault encrypt group_vars/deb/examp.yml
+New Vault password: 
+Confirm New Vault password: 
+Encryption successful
 
+┌──(sergey㉿kali)-[~/ansible/hw_ans1/playbook]
+└─$ ansible-vault encrypt group_vars/el/examp.yml
+New Vault password: 
+Confirm New Vault password: 
+Encryption successful
 ```
 </details>
 
