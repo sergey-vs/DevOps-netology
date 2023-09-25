@@ -1,16 +1,19 @@
 ###cloud vars
 variable "token" {
   type        = string
+  default = ""
   description = "OAuth-token; https://cloud.yandex.ru/docs/iam/concepts/authorization/oauth-token"
 }
 
 variable "cloud_id" {
   type        = string
+  default = "b1g5e4ni06u5p88pf0hb"
   description = "https://cloud.yandex.ru/docs/resource-manager/operations/cloud/get-id"
 }
 
 variable "folder_id" {
   type        = string
+  default = "b1gpok0ichaplcklr1ve"
   description = "https://cloud.yandex.ru/docs/resource-manager/operations/folder/get-id"
 }
 
@@ -31,7 +34,50 @@ variable "vpc_name" {
   description = "VPC network&subnet name"
 }
 
-###common vars
+variable "env_name" {
+  type = string
+  default = "develop"
+  description = "Enviroment name"
+}
+
+variable "vm_web_name" {
+  type = string
+  default = "web"
+  description = "example vm_web_prefix"
+}
+
+variable "image_family" {
+  type = string
+  default = "ubuntu-2004-lts"
+  description = "image for vms"
+}
+
+variable "platform_id" {
+  type        = string
+  default     = "standard-v1"
+  description = "VM platform"
+}
+
+
+###vms
+variable "ssh_user" {
+  type = string
+  default = "sergey"
+  description = "user name for ssh"
+}
+
+variable "ssh_public_key" {
+  type = string
+  default = "~/.ssh/id_ed25519.pub"
+  description = "password for ssh"
+}
+
+variable "packages" {
+  type = list(any)
+  description = "installing packages"
+  default = [ "nginx", "mc" ]
+}
+/*###common vars
 
 variable "vms_ssh_root_key" {
   type        = string
@@ -51,4 +97,4 @@ variable "vm_db_name" {
   type        = string
   default     = "netology-develop-platform-db"
   description = "example vm_db_ prefix"
-}
+}*/
